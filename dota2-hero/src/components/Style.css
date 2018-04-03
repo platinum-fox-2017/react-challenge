@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:300i");
+@import url("https://fonts.googleapis.com/css?family=BenchNine:400");
+.navbar {
+  height: 64px;
+  background-color: #23231a;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Josefin Sans", sans-serif; }
+
+.navbar-col {
+  flex: 1;
+  color: #fff;
+  margin: auto 0; }
+
+.navbar-logo {
+  max-width: 15%;
+  text-decoration: none; }
+
+.navbar-menu {
+  text-align: left; }
+
+.content {
+  padding: 40px;
+  background-color: #322f20; }
+
+.board, .detail {
+  padding: 24px;
+  background-color: #6a5837; }
+
+.board {
+  display: flex;
+  flex-wrap: wrap; }
+
+.detail-content {
+  margin: 0 12%;
+  background-color: #23231a;
+  padding: 16px;
+  color: #fff; }
+
+.card {
+  flex: 1;
+  max-width: 297.25px;
+  box-sizing: border-box;
+  margin: 1rem 0.25em;
+  text-decoration: none; }
+
+.card-header {
+  background-color: #23231a;
+  font-family: "BenchNine", sans-serif;
+  color: #fff; }
+
+.card-content {
+  background-color: #23231a; }
+
+@media all and (max-width: 700px) {
+  .hero {
+    width: 200px;
+    height: 150px;
+    object-fit: cover; } }
+
+/*# sourceMappingURL=Style.css.map */

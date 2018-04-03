@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300i');
+@import url('https://fonts.googleapis.com/css?family=BenchNine:400');
+
+$navbar-font: 'Josefin Sans', sans-serif;
+$navbar-color: #23231a;
+$content-color: #322f20;
+$board-color: #6a5837;
+$card-font: 'BenchNine', sans-serif;
+$font-color: #fff;
+
+.navbar {
+  height: 64px;
+  background-color: $navbar-color;
+  display: flex;
+  justify-content: space-between;
+  font-family: $navbar-font;
+}
+
+.navbar-col {
+  flex: 1;
+  color: $font-color;
+  margin: auto 0;
+}
+
+.navbar-logo {
+  max-width: 15%;
+  text-decoration: none;
+}
+
+.navbar-menu {
+  text-align: left;
+}
+
+.content {
+  padding: 40px;
+  background-color: $content-color;
+}
+
+.board, .detail {
+  padding: 24px;
+  background-color: $board-color;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detail-content {
+  margin: 0 12%;
+  background-color: $navbar-color;
+  padding: 16px;
+  color: $font-color;
+}
+
+.card {
+  flex: 1;
+  max-width: 297.25px;
+  box-sizing: border-box;
+  margin: 1rem 0.25em;
+  text-decoration: none;
+}
+
+.card-header {
+  background-color: $navbar-color;
+  font-family: $card-font;
+  color: $font-color;
+}
+
+.card-content {
+  background-color: $navbar-color;
+}
+
+@media all and (max-width: 700px) {
+  .hero {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+  }
+}
