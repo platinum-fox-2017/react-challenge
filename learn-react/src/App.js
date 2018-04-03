@@ -45,8 +45,6 @@ class App extends Component {
             <h1 className="App-title">Welcome to Star Wars</h1>
           </header>
           <Route exact path='/'
-            addCharacter = { this.addCharacter }
-            characters = { this.state.characters }
             render={ (props) => <CharactersBox
               addCharacter = { this.addCharacter }
               characters = { this.state.characters }
