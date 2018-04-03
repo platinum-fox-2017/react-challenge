@@ -14,7 +14,7 @@ export default class Home extends Component {
     let self = this
     Axios({
       method: 'get',
-      url: 'https://api.giphy.com/v1/gifs/trending?api_key=gJ0CGlHLOziXQdicVmhlBCZkEy7mhDAs&limit=10&rating=R'
+      url: 'https://api.giphy.com/v1/gifs/trending?api_key=gJ0CGlHLOziXQdicVmhlBCZkEy7mhDAs&limit=20&rating=G'
       })
         .then(({data}) => {
           self.setState({
@@ -24,11 +24,12 @@ export default class Home extends Component {
   }
 
   render() {
+    console.log(this.state.gifData)
     return (
       <div className="container py-4">
         <div className="list-group">
             {
-            this.state.gifData.map(gif => <button className="list-group-item list-group-item-action" key={ gif.id }><Link to={`/${gif.id}`}> { gif.title } </Link></button>) 
+            this.state.gifData.map(gif => <ol><button className="list-group-item list-group-item-action" key={ gif.id }><Link to={`/${gif.id}`}> { gif.title } </Link></button></ol> ) 
             }
         </div>
       </div>

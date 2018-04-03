@@ -13,7 +13,7 @@ export default class GifDisplay extends Component {
     let self = this
     Axios({
       method: 'get',
-      url: 'https://api.giphy.com/v1/gifs/trending?api_key=gJ0CGlHLOziXQdicVmhlBCZkEy7mhDAs&limit=10&rating=R'
+      url: 'https://api.giphy.com/v1/gifs/trending?api_key=gJ0CGlHLOziXQdicVmhlBCZkEy7mhDAs&limit=20&rating=G'
       })
         .then(({data}) => {
           self.setState({
@@ -26,7 +26,7 @@ export default class GifDisplay extends Component {
     const { match: { params } } = this.props
     return (
       <div className="container py-4">
-        <img src={`https://media.giphy.com/media/${params.id}/giphy.gif`} className="gif" alt="gif" />
+        <img src={`https://media.giphy.com/media/${params.id}/giphy.gif`} width="250" height="auto" className="gif" alt="gif" />
         {
           this.state.gifData.map(gif => {
             if (gif.id === params.id) {
