@@ -1,0 +1,138 @@
+
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+.App {
+  text-align: center;
+  background-color: rgba(238, 238, 238, 0.9)
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.center, .login {
+  font-family: 'Permanent Marker', sans-serif, cursive;
+  font-size: 30px;
+}
+
+.login {
+  margin-top: 30px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 0.5px solid silver;
+  box-shadow: 2px 2px 10px darkgrey;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 30px;
+  margin: 0 auto;
+  background-color: white;
+  border-top: 10px solid rgba(7, 7, 155, 0.74);
+}
+
+.logo {
+  margin-top: 10px;
+  /* font-size: 20px; */
+}
+
+.body {
+  display: grid;
+  padding: 5vw 10vw;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 25px;
+  grid-row-gap: 45px;
+}
+
+.box {
+  height: 25vw;
+  width: 25vw;
+  overflow: hidden;
+  box-shadow: 5px 10px 10px silver;
+  transition: all 0.3s ease-in-out
+}
+
+.box:hover {
+  transform: scale(1.05);
+  opacity: 0.7;
+}
+
+img {
+  object-fit: cover;
+  min-height: 100%;
+  position: center;
+}
+
+@media all and (max-width: 700px) {
+  .body {
+    align-items: center;
+    grid-template-columns: auto;
+    margin: 5vw 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .box {
+    height: 75vw;
+    width: 75vw;
+    overflow: hidden;
+    object-fit: cover;
+  }
+}
+
+a:link {
+  color: black;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+}
+
+.grid {
+  background-color: white;
+  padding: 40px 2px 2px 10px;
+  margin: 5vw 20vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  box-shadow: 4px 2px 20px silver;
+  border-radius: 5px 5px 5px 5px;
+}
+
+#img {
+  max-width: 75vw;
+}
+
+.photo-caption {
+  padding: 0.5em 4em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 18px;
+}
+
+.disp-body {
+  padding-bottom:15vw;
+}
+
+#onload {
+  background-image: url('/assets/images/Jake_wiggle.gif')
+}
