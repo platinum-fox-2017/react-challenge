@@ -20,6 +20,7 @@ class Headline extends Component {
       + 'sources=ars-technica&'
       + 'apiKey=7680942fa076452ab0671b9ef5516074'
     axios.get(url).then(response => {
+      // console.log(response.data);
       this.setState({
         newsArs: response.data.articles
       })

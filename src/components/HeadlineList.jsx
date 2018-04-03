@@ -11,7 +11,16 @@ class HeadlineList extends React.Component {
             this.props.newsSource.map((news, i) => (
               <div key={ i } className="box">
                 <div className="content">
-                  <a href={ news.url }>{ news.title }</a>
+                  <a href={ news.url } >
+                    <img src={ news.urlToImage } alt={ news.title } className="image" />
+                  </a>
+                  <a href={ news.url }>{ news.title }</a><br/>
+                  <small>by { news.author } @ { news.source.name } </small>
+                  <small>
+                    { new Date(news.publishedAt).getDate() }-
+                    { new Date(news.publishedAt).getMonth() }-
+                    { new Date(news.publishedAt).getFullYear() }
+                  </small>
                   <p>{ news.description }</p>
                 </div>
               </div>
