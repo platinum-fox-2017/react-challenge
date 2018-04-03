@@ -1,22 +1,25 @@
 import React from 'react'
+import 'bulma/css/bulma.css'
 
 class HeadlineQueryList extends React.Component {
-
   render () {
-    // const { newsSource } = this.props
     return (
-      <div>
-        <h3>{ this.props.err }</h3>
-          <ul>
-            {
-              this.props.newsLook.map((news, i) => (
-                <li key={ i }>
+      <div className="columns">
+        <div className="column is-3"></div>
+        <div className="column is-6">
+          <h3>{ this.props.err }</h3>
+          {
+            this.props.newsLook.map((news, i) => (
+              <div key={ i } className="box">
+                <div className="content">
                   <a href={ news.url }>{ news.title }</a>
                   <p>{ news.description }</p>
-                </li>
-              ))
-            }
-          </ul>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div className="column is-3"></div>
       </div>
     )
   }
