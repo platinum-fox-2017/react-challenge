@@ -1,0 +1,21 @@
+input[type=text] {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  font-size: 1.2em;
+}
+
+button {
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: #4CC7EA;
+  color: white;
+}
+
+button:hover {
+  background-color: #4AB1E5;
+}
