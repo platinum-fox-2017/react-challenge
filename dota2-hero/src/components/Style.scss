@@ -71,6 +71,10 @@ $font-color: #fff;
   background-color: $navbar-color;
 }
 
+.loading {
+  margin: 0 auto;
+}
+
 @media all and (max-width: 700px) {
   .hero {
     width: 200px;

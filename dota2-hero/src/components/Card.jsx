@@ -9,7 +9,7 @@ export default class Card extends Component {
           { this.props.name }
         </nav>
         <nav className="card-content">
-          <img className="hero" src={ 'https://api.opendota.com' + this.props.img_url }/>
+          <img className="hero" src={ 'https://api.opendota.com' + this.props.img_url } alt={ this.props.name }/>
         </nav>
       </Link>
     )
