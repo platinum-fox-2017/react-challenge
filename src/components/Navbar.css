@@ -15,13 +15,13 @@
 
 
 .brand-logo {
-  animation: App-logo-spin infinite 3s linear;
+  /* animation: App-logo-spin infinite 3s linear; */
   height: 25px;
   position: relative;
   margin-top:-10px;
 }
 
-@keyframes brand-logo-spin {
+/* @keyframes brand-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */

@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import HeaderNav from './HeaderNav'
+import logo from '../logo.svg'
+
+import './DetailPage.css'
 
 export default class DetailPage extends Component {
   constructor(props) {
@@ -11,38 +15,62 @@ export default class DetailPage extends Component {
       isLoading: false,
     }    
   }
+
   fetchData = (name) => {
+    this.setState({isLoading: true})
     axios({
       method: 'get',
       url: `/search?name=${name}`
     })
       .then(response => {
+        this.setState({isLoading: false})
         console.log(response.data[0])
-        this.setState({isLoading: true})
         this.setState({
           country: response.data[0].country,
           website: response.data[0].web_pages[0]
         })
       })
       .catch(err => {
+        this.setState({isLoading: false})
         console.log(`err: ${err}`)
       })
   }
-  componentWillMount () {
+
+  componentDidMount () {
     console.log(this.state.name)
     this.fetchData(this.state.name)
   }
+
+
+  setHeader = () => {
+    if(this.state.isLoading){
+      return 'header-logo-static'
+    } else {
+      return 'header-logo'
+    }
+  }
+
   render() {
     return (
       <div>
-        <h1>{this.state.name}</h1>
-        {this.state.isLoading ? 
+        <HeaderNav setHeader={this.setHeader} />
+        <div className='container'>
+          <h1>{this.state.name}</h1>
+          {this.state.isLoading ? 
           <div>
-            <h3>Name: {this.state.name}</h3>
-            <h3>Country: {this.state.country}</h3>
-            <h3>Website: {this.state.website}</h3> 
+            <img className='loading-logo' src={logo} alt=""/> 
+            <h2 className='loading'>Loading<span>.</span><span>.</span><span>.</span></h2>
           </div>
         : null}
+          {!this.state.isLoading ? 
+            <div className='wrapper'>
+              <h5>Name: {this.state.name}</h5>
+              <h5>Country: {this.state.country}</h5>
+              <h5>Website: <a href={this.state.website}> {this.state.website} </a></h5> 
+            </div>
+          : null}
+          <div><button onClick={this.props.history.goBack}>Back</button></div>
+        </div>
       </div>
     )
   }

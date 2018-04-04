@@ -4,6 +4,10 @@
   height: 100px;
 }
 
+.header-logo-static {
+  height: 100px;
+}
+
 @keyframes header-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

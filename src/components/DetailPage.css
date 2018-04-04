@@ -1,8 +1,15 @@
-.back-button {
-  bottom: 45px;
-  right: 24px;
-  position: fixed;
+.wrapper {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px 40px;
+  margin-top: 40px;
+  text-align: left;
 }
+
+h1 {
+  margin-top: 40px;
+}
+
 
 .loading-logo {
   margin-top: 40px;
@@ -18,28 +25,6 @@
 
 .loading {
   color: #4CC7EA;
-}
-
-.card-result {
-  border-radius: 10px;
-  padding: 30px 10px;
-  margin: 20px 0px;
-}
-
-.card-result:nth-child(even) {
-  background-color: white;
-}
-
-.card-result:nth-child(odd) {
-  background-color: rgb(191, 223, 243);
-}
-
-.card-result:nth-child(even) h3{
-  color: black;
-}
-
-.card-result:nth-child(odd) h3{
-  color: rgb(5, 73, 129);
 }
 
 

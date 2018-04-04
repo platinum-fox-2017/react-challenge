@@ -19,3 +19,7 @@ button {
 button:hover {
   background-color: #4AB1E5;
 }
+
+#select {
+  width: 70%;
+}

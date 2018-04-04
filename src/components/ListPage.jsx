@@ -1,22 +1,29 @@
 import React, { Component } from 'react'
-import InputForm from './InputForm'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-
+import './ListPage.css'
+import logo from '../logo.svg'
+import HeaderNav from './HeaderNav'
+import { connect } from 'react-redux'
 
 export default class ListPage extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       universitiesList: [],
       showResult: false,
-      showNotFound: false
+      showNotFound: false,
+      isLoading: false
     }
   }
 
+  componentDidMount () {
+    this.handleGetData(this.props.match.params.name, this.props.match.params.country)
+  }
+
   checkQuery = () => {
-    console.log(this.state.universitiesList.length)
     this.setState({showResult: true})
+    this.setState({isLoading: false})
     if(this.state.universitiesList.length === 0)
       this.setState({showNotFound: true})
     else
@@ -24,8 +31,8 @@ export default class ListPage extends Component {
   }
 
   handleGetData = (name, country) => {
-
-    if(name === '' && country !== '') {
+    this.setState({isLoading: true})
+    if(name === undefined && country !== undefined) {
       axios({
         method: 'get',
         url: `/search?country=${country}`
@@ -36,9 +43,10 @@ export default class ListPage extends Component {
           this.checkQuery()
         })
         .catch(err => {
+          this.setState({isLoading: false})
           console.log(`error: ${err}`)
         })
-    } else if (country === '' && name !== '') {
+    } else if (country === undefined && name !== undefined) {
       axios({
         method: 'get',
         url: `/search?name=${name}`
@@ -49,9 +57,10 @@ export default class ListPage extends Component {
           this.checkQuery()
         })
         .catch(err => {
+          this.setState({isLoading: false})
           console.log(`error: ${err}`)
         })
-    } else if(country !== '' && name !== '') {
+    } else if(country !== undefined && name !== undefined) {
       axios({
         method: 'get',
         url: `/search?name=${name}&country=${country}`
@@ -62,33 +71,54 @@ export default class ListPage extends Component {
           this.checkQuery()
         })
         .catch(err => {
+          this.setState({isLoading: false})
           console.log(`error: ${err}`)
         })
     }
 
   }
 
+  setHeader = () => {
+    if(this.state.isLoading){
+      return 'header-logo-static'
+    } else {
+      return 'header-logo'
+    }
+  }
+
   render() {
     return (
       <div>
-        <InputForm handleGetData={this.handleGetData} />
-        {this.state.showResult ? <h2>Hasil : </h2> : null}
+        <HeaderNav setHeader={this.setHeader} />
+        {this.state.isLoading ? 
+          <div>
+            <img className='loading-logo' src={logo} alt=""/> 
+            <h2 className='loading'>Loading<span>.</span><span>.</span><span>.</span></h2>
+          </div>
+        : null}
+        {this.state.showResult ? 
+            <Link to='/'className='btn btn-danger btn-rounded back-button'>
+              Back
+            </Link>
+           : null}
         {this.state.showNotFound ? <h3>Search Not Found</h3> : null}
-        <ul>
-          {
-            this.state.universitiesList.map((university,i) => {
-              return (
-              <div key={i}>
-                <Link to={{
-                  pathname: '/'+university.name.split(' ').join('-'),
-                }}>
-                <h3>Name: {university.name}</h3>
-                <p>Country: {university.country}</p>
-                </Link>
-              </div>)
-            })
-          }
-        </ul>
+        {this.state.showResult ? 
+          <div className='container'>
+            {
+              this.state.universitiesList.map((university,i) => {
+                return (
+                <div key={i} className='card-result'>
+                  <Link to={{
+                    pathname: '/detail/'+university.name.split(' ').join('-'),
+                  }}>
+                  <h3>{university.name}</h3>
+                  <p>{university.country}</p>
+                  </Link>
+                </div>)
+              })
+            }
+          </div>
+        : null }
       </div>
     )
   }
