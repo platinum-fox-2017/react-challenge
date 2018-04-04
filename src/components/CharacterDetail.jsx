@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import moment from 'moment'
+import { connect } from 'react-redux'
+import * as CharacterActions from '../actions/index'
 
 class CharacterList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      person: {}
-    }
-  }
 
   componentDidMount() {
     const { match: { params } } = this.props
@@ -16,7 +12,7 @@ class CharacterList extends Component {
       const person = results.data
       person.created = moment(person.created).format("dddd, MMMM Do YYYY, h:mm:ss a")
       person.edited = moment(person.edited).format("dddd, MMMM Do YYYY, h:mm:ss a")
-      this.setState( {person} )
+      this.props.loadCharacter(person)
     })
   }
 
@@ -25,8 +21,8 @@ class CharacterList extends Component {
       <div>
         <ul className="list-group">
           {
-            Object.keys(this.state.person).map(key =>
-            <li key={key} className="list-group-item">{key} - {this.state.person[key]}</li> )
+            Object.keys(this.props.char).map(key =>
+            <li key={key} className="list-group-item">{key} - {this.props.char[key]}</li> )
           }
         </ul>
       </div>
@@ -34,4 +30,10 @@ class CharacterList extends Component {
   }
 }
 
-export default CharacterList;
+const mapStateToProps = (state) => {
+  return {
+    char: state.char
+  }
+}
+
+export default connect(mapStateToProps, CharacterActions)(CharacterList)
