@@ -1,5 +1,6 @@
 import React from 'react'
 import 'bulma/css/bulma.css'
+import logo from '../logo.svg';
 
 class HeadlineList extends React.Component {
   render () {
@@ -8,6 +9,7 @@ class HeadlineList extends React.Component {
         <div className="column is-3"></div>
         <div className="column is-6">
           {
+            this.props.newsSource.length > 0 ?
             this.props.newsSource.map((news, i) => (
               <div key={ i } className="box">
                 <div className="content">
@@ -25,6 +27,7 @@ class HeadlineList extends React.Component {
                 </div>
               </div>
             ))
+            : <img src={logo} className="App-logo" alt="logo" />
           }
         </div>
         <div className="column is-3"></div>
