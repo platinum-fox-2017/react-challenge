@@ -18,11 +18,12 @@ class CharacterList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="col-md-6 offset-md-3">
         <ul className="list-group">
           {
             Object.keys(this.props.char).map(key =>
-            <li key={key} className="list-group-item">{key} - {this.props.char[key]}</li> )
+            <li key={key} className="list-group-item">
+            <span>{key} - {this.props.char[key]}</span></li> )
           }
         </ul>
       </div>

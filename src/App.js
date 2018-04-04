@@ -11,7 +11,7 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      message: 'AndrewKusumaReact'
+      message: 'StarWars'
     }
   }
   render() {
@@ -22,9 +22,17 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to {this.state.message}</h1>
           </header>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/persons">All Persons</Link>
+          <ul className="nav justify-content-center">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/about" className="nav-link">About</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/persons" className="nav-link">All Persons</Link>
+            </li>
+          </ul>
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
           <Route exact path='/persons' component={CharacterList} />

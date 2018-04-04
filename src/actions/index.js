@@ -1,4 +1,3 @@
-import axios from 'axios'
 
 // nanti pakai thunk
 // export function loadCharacters() {
