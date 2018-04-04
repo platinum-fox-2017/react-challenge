@@ -1,3 +1,19 @@
+body {
+  background: #86CCE3
+}
+
+.youtube {
+  border: 3px #2c3e50 dashed;
+  margin-top: 20px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: #f45643
+}
+
 .App {
   text-align: center;
 }
