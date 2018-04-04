@@ -16,8 +16,16 @@ const searchCharacter = (payload) => {
   }
 }
 
+const goPage = (payload) => {
+  return {
+    type: 'GO_PAGE',
+    payload: payload
+  }
+}
+
 export {
   fetchCharaters,
   loading,
-  searchCharacter
+  searchCharacter,
+  goPage
 }

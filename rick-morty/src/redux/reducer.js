@@ -1,7 +1,8 @@
 const stateInit = {
   characters: [],
   activeCharacter: {},
-  isLoading: true
+  isLoading: true,
+  pageIndex: 1
 };
 
 const reducer = (state = stateInit, action) => {
@@ -13,10 +14,9 @@ const reducer = (state = stateInit, action) => {
       }
     }
     case 'FETCHCHARACTERS': {
-      console.log('FETCH!')
       return { 
         ...state,
-        characters: [ ...state.characters, ...action.payload ],
+        characters: [ ...action.payload ],
         isLoading: false
       }
     }
@@ -25,6 +25,12 @@ const reducer = (state = stateInit, action) => {
         ...state,
         activeCharacter: action.payload,
         isLoading: false
+      }
+    }
+    case 'GO_PAGE': {
+      return { 
+        ...state,
+        pageIndex: action.payload
       }
     }
     default: {

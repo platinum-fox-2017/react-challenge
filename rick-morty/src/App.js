@@ -37,20 +37,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-
-    axios.get(`https://rickandmortyapi.com/api/character/?page=${this.state.index}`)
+    axios.get(`https://rickandmortyapi.com/api/character/?page=${this.props.pageIndex}`)
       .then(({ data }) => {
         this.props.fetchCharaters(data.results)                
       })
       .catch((err) => {
         window.alert(err)
       });
-    }
+  }
 }
 
 const mapStateToProps = (state) => ({
   characters: state.characters,
-  isLoading: state.isLoading
+  isLoading: state.isLoading,
+  pageIndex: state.pageIndex
 });
 
 const mapDispatchToProps = (dispatch) => ({
