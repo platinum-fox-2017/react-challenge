@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
+
+import Home from './components/Home.jsx';
+import CharacterDetail from './components/CharcterDetail.jsx';
+
 import logo from './logo.svg';
 import './App.css';
+import connect from 'react-redux/lib/connect/connect';
 
-import Home from './components/Home.jsx'
-import CharacterDetail from './components/CharcterDetail.jsx'
+
+
+
+
+function fetchCharaters (payload) {
+  console.log('Actions ===> payload:', payload)
+  return {
+    type: 'FETCHCHARACTERS',
+    payload: payload
+  }
+}
 
 class App extends Component {
   constructor () {
@@ -12,11 +27,11 @@ class App extends Component {
     this.state = {
       characters: [],
       activeCharacter: {},
-      isLoading: true
+      isLoading: false
     }
   }
 
-  addCharacter = () => {
+  generateCharacter = () => {
     this.changeLoadingStatus(true)
     fetch(`https://rickandmortyapi.com/api/character`)
     .then((response) => {
@@ -38,9 +53,7 @@ class App extends Component {
       isLoading: status
     })
   }
-
   
-
   render() {
     return (
       <BrowserRouter>
@@ -60,7 +73,7 @@ class App extends Component {
             <div>
                 <Route exact path='/'
                   render={ (props) => <Home
-                    characters = { this.state.characters }
+                    characters = { this.props.characters }
                     { ...props }
                   /> }
                 />
@@ -73,8 +86,33 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.addCharacter();
+    // this.generateCharacter();
+
+    fetch(`https://rickandmortyapi.com/api/character`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((characters) => {
+        console.log(characters.results)
+        this.props.fetchCharaters(characters.results)        
+      })
+      .catch((err) => {
+        window.alert(err)
+      });
+
+    // this.props.fetchCharaters(test);
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    characters: state.characters
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchCharaters: (payload) => dispatch(fetchCharaters(payload))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+// export default App;

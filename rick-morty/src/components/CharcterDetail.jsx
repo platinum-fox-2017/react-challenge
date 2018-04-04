@@ -28,9 +28,9 @@ export default class CharacterDetail extends Component {
   }
 
   changeActiveCharacter = (character) => {
-    this.setState({
-      character: character
-    })
+    this.setState(prevState => ({
+      activeCharacter: { ...prevState.activeCharacter, ...character }
+    }))
   }
 
   changeLoadingStatus = (status) => {
@@ -50,12 +50,12 @@ export default class CharacterDetail extends Component {
           :
           <div className="container-detail">
             <div className="character-detail">
-              <img className="detail-img" src={ this.state.character.image } alt={ this.state.character.name }/>
-              <p>{ this.state.character.name }</p>
-              <p>Status : { this.state.character.status }</p>
-              <p>Species : { this.state.character.species }</p>
-              <p>Gender : { this.state.character.gender }</p>
-              <p>Location : { this.state.character.location.name }</p>
+              <img className="detail-img" src={ this.state.activeCharacter.image } alt={ this.state.activeCharacter.name }/>
+              <h2>{ this.state.activeCharacter.name }</h2>
+              <p>Status : { this.state.activeCharacter.status }</p>
+              <p>Species : { this.state.activeCharacter.species }</p>
+              <p>Gender : { this.state.activeCharacter.gender }</p>
+              <p>Location : { this.state.activeCharacter.location.name }</p>
             </div>
           </div>
       }</div>
