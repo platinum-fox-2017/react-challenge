@@ -5,9 +5,6 @@ import ArticleList from './components/ArticleList'
 import ArticleDetail from './components/ArticleDetail'
 
 class App extends Component {
-  constructor(){
-    super();
-  }
 
   render() {
     return (

@@ -43,7 +43,7 @@ class ArticleDetail extends Component {
     this.fetchStory()
   }
   render() {
-    const { story, comments, error } = this.state
+    const { story, error } = this.state
     if (error) {
       return (
         <div className="table">
