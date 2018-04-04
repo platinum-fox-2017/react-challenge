@@ -42,10 +42,13 @@ class Display extends Component {
   }
   componentDidMount () {
     this.checkLoad(true)
-    for (let i = 0; i < this.props.payload.length; i++) {
-      if (this.props.payload[i].caption.id === this.props.match.params.id) {
+    let load = getDataAction().payload
+    // this.props.getData()
+    // let load = this.props
+    for (let i = 0; i < load.length; i++) {
+      if (load[i].caption.id === this.props.match.params.id) {
         this.setState(prevState => ({
-          singleImage: [...prevState.singleImage, this.props.payload[i]]
+          singleImage: [...prevState.singleImage, load[i]]
         }))
         this.checkLoad(false)
       }
