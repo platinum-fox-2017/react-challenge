@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
 const API = 'AIzaSyAqeflTMkQmxDmlCAUlEILEBEmGeoz3Mco'
 const channelID = 'UC29ju8bIPH5as8OGnQzwJyA'
@@ -21,7 +22,6 @@ export default class Youtube extends Component {
       .then(response => response.json())
       .then(responseJson => {
         // console.log(responseJson);
-        // const resultYT = responseJson.items.map(obj => "https://www.youtube.com/embed/"+obj.id.videoId)
         const resultYT = responseJson.items
         this.setState({resultYT: resultYT})
       })
@@ -31,15 +31,13 @@ export default class Youtube extends Component {
   }
 
   render() {
-    // console.log(finalURL)
-    // console.log("resultYT ", this.state.resultYT);
     const ytLink = "https://www.youtube.com/embed/"
     return (
       <div>
         {
           this.state.resultYT.map((item, i) => {
             console.log("item ",item);
-            var frame = <div className="col-xs-6" key={i}><h3>{item.snippet.title}</h3><p>Channel : {item.snippet.channelTitle}</p>
+            var frame = <div className="col-xs-6" key={i}><Link to={item.id.videoId}><h3>{item.snippet.title}</h3></Link><p>Channel : {item.snippet.channelTitle}</p>
             <iframe width="280" height="160" src={ytLink+item.id.videoId} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
             </div>
             return frame

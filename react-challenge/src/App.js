@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
 import Youtube from './components/Youtube'
+import YoutubeDetail from './components/YoutubeDetail'
 import Category from './components/Category'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
@@ -12,8 +13,11 @@ class App extends Component {
         <div className="App">
           <Navbar />
 
-        <Route exact path="/" component={Youtube} />
-        <Route path="/category" component={Category} />
+        <Switch>
+          <Route exact path="/" component={Youtube} />
+          <Route path="/category" component={Category} />
+          <Route path="/:id" component={YoutubeDetail} />
+        </Switch>
         </div>
       </BrowserRouter>
     );
