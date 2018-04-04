@@ -2,24 +2,13 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { loading, fetchCharaters } from './redux/actions';
+
 import Home from './components/Home.jsx';
 import CharacterDetail from './components/CharcterDetail.jsx';
 
 import logo from './logo.svg';
 import './App.css';
-
-function fetchCharaters (payload) {
-  return {
-    type: 'FETCHCHARACTERS',
-    payload: payload
-  }
-}
-
-function loading (payload) {
-  return {
-    type: 'LOADING',
-  }
-}
 
 class App extends Component {
   render() {

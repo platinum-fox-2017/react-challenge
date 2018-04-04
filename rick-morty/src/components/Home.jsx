@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import CharacterBox from './CharcterBox.jsx'
 
-
 import '../Home.css';
 
 export default class Home extends Component {

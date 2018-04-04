@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { loading, searchCharacter } from '../redux/actions';
+
 import logo from '../logo.svg';
 
 import '../CharacterDetail.css';
@@ -46,19 +48,6 @@ class CharacterDetail extends Component {
       .catch((err) => {
         window.alert(err)
       });
-  }
-}
-
-function searchCharacter (payload) {
-  return {
-    type: 'SEARCHCHARACTER',
-    payload: payload
-  }
-}
-
-function loading () {
-  return {
-    type: 'LOADING',
   }
 }
 
