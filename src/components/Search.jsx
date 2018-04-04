@@ -26,6 +26,7 @@ class Search extends React.Component {
       'language=en&' +
       'sortBy=publishedAt&' +
       'apiKey=7680942fa076452ab0671b9ef5516074';
+    this.props.getNewsSearchRdx([])
     this.setState({
       getStatus: true
     })

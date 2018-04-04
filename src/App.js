@@ -15,8 +15,9 @@ class App extends Component {
         <div className="App">
           <Navbar></Navbar>
           <Switch>
-            <Route exact path="/" component={Headline} />
             <Route path="/search" component={Search} />
+            <Route exact path="/" component={Headline} />
+            <Route exact path="/:category" component={Headline} />
             <Route component={ErrorPage} />
           </Switch>
         </div>

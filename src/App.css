@@ -3,8 +3,9 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 0.8s linear;
-  height: 80px;
+  animation: App-logo-spin infinite 2s linear;
+  height: 47px;
+  padding: 5px;
 }
 
 .App-header {

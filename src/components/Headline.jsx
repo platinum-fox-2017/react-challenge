@@ -4,6 +4,7 @@ import { getNewsArsRdx, getNewsSearchRdx } from '../redux/index.js'
 import axios from 'axios'
 
 import HeadlineList from './HeadlineList'
+import SourceNavbar from './SourceNavbar'
 
 class Headline extends Component {
   constructor () {
@@ -18,9 +19,12 @@ class Headline extends Component {
     this.getNewsArs()
   }
 
-  getNewsArs = () => {
+  getNewsArs = (source) => {
+    if (!source) {
+      source = 'ars-technica'
+    }
     let url = 'https://newsapi.org/v2/top-headlines?'
-      + 'sources=ars-technica&'
+      + `sources=${source}&`
       + 'apiKey=7680942fa076452ab0671b9ef5516074'
     axios.get(url).then(response => {
       // console.log(response.data);
@@ -39,7 +43,7 @@ class Headline extends Component {
   render () {
     return (
       <div>
-        <h1>Ars Technica News</h1>
+        <SourceNavbar getNewsArs={ this.getNewsArs } />
         <h2>{ this.state.err }</h2>
         <HeadlineList newsSource={ this.props.newsArs }></HeadlineList>
       </div>
