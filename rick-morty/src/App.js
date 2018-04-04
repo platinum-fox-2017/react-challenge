@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { loading, fetchCharaters } from './redux/actions';
-
+import Header from './components/Header.jsx';
+import Loading from './components/Loading.jsx';
 import Home from './components/Home.jsx';
 import CharacterDetail from './components/CharcterDetail.jsx';
 
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -15,17 +16,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <header className="App-header">
-            <Link to={`/`}>
-              <img src={logo} className="App-logo" alt="logo" />
-            </Link>
-          </header>
+          <Header/>
           <div>{
             !this.props.characters.length ?
-            <div>
-              <img src={logo} className="App-logo" alt="logo" />
-              <p>Awesomeness is Coming . . .</p>
-            </div>
+            <Loading/>
             : 
             <div>
                 <Route exact path='/'
@@ -43,12 +37,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://rickandmortyapi.com/api/character`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((characters) => {
-        this.props.fetchCharaters(characters.results)        
+
+    axios.get(`https://rickandmortyapi.com/api/character/?page=${this.state.index}`)
+      .then(({ data }) => {
+        this.props.fetchCharaters(data.results)                
       })
       .catch((err) => {
         window.alert(err)

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios'
 
 import { loading, searchCharacter } from '../redux/actions';
 
-import logo from '../logo.svg';
-
+import Loading from './Loading.jsx';
 import '../CharacterDetail.css';
 
 class CharacterDetail extends Component {
@@ -12,10 +12,7 @@ class CharacterDetail extends Component {
     return (
       <div>{
         this.props.isLoading ?
-          <div>
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>Awesomeness is Coming . . .</p>       
-          </div>
+            <Loading/>
           :
           <div className="container-detail">
             <div className="character-detail">
@@ -38,12 +35,10 @@ class CharacterDetail extends Component {
 
   componentDidMount() {
     let id = this.props.match.params.id
-    fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((character) => {
-        this.props.searchCharacter(character)
+
+    axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+      .then(({ data }) => {
+        this.props.searchCharacter(data);              
       })
       .catch((err) => {
         window.alert(err)

@@ -6,9 +6,7 @@ const fetchCharaters = (payload) => {
 }
 
 const loading = () => {
-  return {
-    type: 'LOADING',
-  }
+  return { type: 'LOADING' }
 }
 
 const searchCharacter = (payload) => {

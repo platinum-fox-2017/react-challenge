@@ -4,12 +4,20 @@
 
 .App-logo {
   animation: App-logo-spin infinite 1s linear;
-  height: 80px;
+  height: 200px;
+  cursor: pointer;
+}
+
+.loader {
+  animation: App-logo-spin infinite 3s linear;
+  height: 200px;
   cursor: pointer;
 }
 
 .App-header {
-  background-color: #222;
+  /* background-color: #222; */
+  background-image: url("./assets/img/header.jpg");
+  background-size: cover;
   padding: 20px;
   color: white;
 }

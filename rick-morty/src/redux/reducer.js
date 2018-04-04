@@ -7,9 +7,13 @@ const stateInit = {
 const reducer = (state = stateInit, action) => {
   switch(action.type) {
     case 'LOADING': {
-      return { ...state, isLoading: true }
+      return { 
+        ...state, 
+        isLoading: true 
+      }
     }
     case 'FETCHCHARACTERS': {
+      console.log('FETCH!')
       return { 
         ...state,
         characters: [ ...state.characters, ...action.payload ],
@@ -19,7 +23,7 @@ const reducer = (state = stateInit, action) => {
     case 'SEARCHCHARACTER': {
       return { 
         ...state,
-        activeCharacter: { ...state.activeCharacter, ...action.payload},
+        activeCharacter: action.payload,
         isLoading: false
       }
     }
