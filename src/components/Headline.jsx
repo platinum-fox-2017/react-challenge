@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import HeadlineList from './HeadlineList'
-
 import { connect } from 'react-redux'
+import { getNewsArsRdx, getNewsSearchRdx } from '../redux/index.js'
+import axios from 'axios'
+
+import HeadlineList from './HeadlineList'
 
 class Headline extends Component {
   constructor () {
@@ -26,6 +27,8 @@ class Headline extends Component {
       this.setState({
         newsArs: response.data.articles
       })
+      this.props.getNewsArsRdx(response.data.articles)
+      // console.log(this.props.newsArs);
     }).catch(err => {
       this.setState({
         err: err.message
@@ -38,7 +41,7 @@ class Headline extends Component {
       <div>
         <h1>Ars Technica News</h1>
         <h2>{ this.state.err }</h2>
-        <HeadlineList newsSource={ this.state.newsArs }></HeadlineList>
+        <HeadlineList newsSource={ this.props.newsArs }></HeadlineList>
       </div>
     );
   }
@@ -46,13 +49,15 @@ class Headline extends Component {
 
 const stateToProps = (state) => {
   return {
-
+    newsArs: state.newsArs,
+    newsSearch: state.newsSearch
   }
 }
 
-const dispatchToProps = (state) => {
+const dispatchToProps = (dispatch) => {
   return {
-
+    getNewsArsRdx: (news) => dispatch(getNewsArsRdx(news)),
+    getNewsSearchRdx: (searchNews) => dispatch(getNewsSearchRdx(searchNews))
   }
 }
 
