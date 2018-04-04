@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch }  from 'react-router-dom'
 import PeopleList from './components/PeopleList'
@@ -13,14 +12,14 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <header className="App-header">
-            <img src={ logo } className="App-logo" alt="logo" />
-            <h1 className="App-title">All the Star Wars data you've ever wanted!</h1>
+            <img src="https://pokemontcg.io/assets/images/pokemon-minimalist-30bc8a16a6a63e980a4e06c11a66638b.png" className="App-logo" alt="logo" />
+            {/* <h1 className="App-title">All the Star Wars data you've ever wanted!</h1> */}
           </header>
           <Switch>
             <Route exact path="/" component={ Home } />
             <Route exact path="/character" component={ PeopleList } />
-            <Route path="/character/:id" component={ CharacterPage } />
-            <Route component={ ErrPage } />
+            <Route path="/card/:id" component={ CharacterPage } />
+            {/* <Route component={ ErrPage } /> */}
           </Switch>
         </div>
       </BrowserRouter>

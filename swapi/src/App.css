@@ -1,17 +1,19 @@
 .App {
   text-align: center;
+  /* background-color: #083962; */
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  /* animation: App-logo-spin infinite 20s linear; */
+  margin: 20px 0px;
+  height: 100px;
 }
 
 .App-header {
-  background-color: #272B30;
+  background-color: #F6EED5;
   height: 150px;
   padding: 20px;
-  color: #FFE300;
+  color: #6A8394;
 }
 
 .App-title {
@@ -20,6 +22,41 @@
 
 .App-intro {
   font-size: large;
+}
+
+.cards-wrapper, .singlepoke {
+  margin: 30px 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 50px;
+}
+
+.card {
+  height: 25vm;
+  width: 25vm;
+  overflow: hidden;
+  /* box-shadow: 5px 10px 10px #2062AC; */
+}
+
+.card:hover {  
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+img.pokecard {
+  object-fit: cover;
+  min-height: 100%;
+  position: center;
+  /* border: 0.5rem solid #2062AC;
+  border-radius: 20px; */
+}
+
+img.singlecard, img.onload {
+  width: 25%;
 }
 
 @keyframes App-logo-spin {

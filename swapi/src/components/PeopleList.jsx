@@ -6,52 +6,86 @@ class PeopleList extends Component {
   constructor () {
     super ()
     this.state = {
-      people: []
+      cards: [],
+      isLoading: true
     }
   }
 
   componentDidMount() {
-    this.getPeople()
+    this.getCards()
   }
 
-  getPeople() {
-    // axios.get('https://api.got.show/api/characters/')
-    //   .then((response) => {
-    //     console.log(response)
-    //     const char = response.data.filter(character => character.imageLink).splice(0, 15)
-    //     console.log(char)
-    //   }).catch((err) => {
-    //     console.log(err.response)
-    //   })
-    axios.get('https://swapi.co/api/people')
+  checkLoad(state) {
+    this.setState(() => ({
+      loading: state
+    }))
+  }
+
+  getCards() {
+    this.checkLoad(true)
+    axios.get('https://api.pokemontcg.io/v1/cards')
       .then((response) => {
-        console.log(response.data.results)
+        const data = response.data.cards.splice(0, 30)
         this.setState((prevState) => {
           return {
-            people: [ ...prevState.people, ...response.data.results ]
+            cards: [ ...prevState.cards, ...data ]
           }
         })
+        this.checkLoad(false)
       }).catch((err) => {
         console.log(err.response)
       })
+    // axios.get('https://swapi.co/api/people')
+    //   .then((response) => {
+    //     console.log(response.data.results)
+    //     this.setState((prevState) => {
+    //       return {
+    //         people: [ ...prevState.people, ...response.data.results ]
+    //       }
+    //     })
+    //   }).catch((err) => {
+    //     console.log(err.response)
+    //   })
   }
 
   render() {
     return (
-      <div className="people">
-        <ul>
+      <div className="cards-wrapper">
+      {
+        this.state.loading ?
+        <div>
+          <img src="https://media.giphy.com/media/inuVmrCvPaPC/giphy.gif" alt="snorlax" className="onload"/>
+          <h3>please wait while we process your request</h3>
+        </div>
+        :
+        <div className="cards">
           {
-            this.state.people.map((person, i) => {
+            this.state.cards.map((card, i) => {
               return (
-                <li key={ i }>
-                  <Link to={ `/character/${i+1}` }>
-                    { person.name }
+                <div className="card" key={ i }>
+                  <Link to={ `/card/${card.id}` }>
+                    <img src={ card.imageUrl } className="pokecard" alt="cardimg"/>
                   </Link>
-                </li>
+                </div>
               )
             })
           }
-        </ul>
+
+          {/* <ul>
+            {
+              this.state.people.map((person, i) => {
+                return (
+                  <li key={ i }>
+                    <Link to={ `/character/${i+1}` }>
+                      { person.name }
+                    </Link>
+                  </li>
+                )
+              })
+            }
+          </ul> */}
+        </div>
+      }
       </div>
     );
   }
