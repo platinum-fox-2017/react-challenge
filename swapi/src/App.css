@@ -47,6 +47,12 @@
   cursor: pointer;
 }
 
+/* .pokes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 5px;
+} */
+
 img.pokecard {
   object-fit: cover;
   min-height: 100%;
