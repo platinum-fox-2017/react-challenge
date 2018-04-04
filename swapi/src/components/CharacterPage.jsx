@@ -53,7 +53,7 @@ class CharacterPage extends Component {
   }
 
   backtoList = () => {
-    this.props.history.push('/character')
+    this.props.history.push('/')
   }
 
   render() {

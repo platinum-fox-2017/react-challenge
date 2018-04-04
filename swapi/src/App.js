@@ -16,8 +16,8 @@ class App extends Component {
             {/* <h1 className="App-title">All the Star Wars data you've ever wanted!</h1> */}
           </header>
           <Switch>
-            <Route exact path="/" component={ Home } />
-            <Route exact path="/character" component={ PeopleList } />
+            <Route exact path="/" component={ PeopleList } />
+            {/* <Route exact path="/character" component={ PeopleList } /> */}
             <Route path="/card/:id" component={ CharacterPage } />
             {/* <Route component={ ErrPage } /> */}
           </Switch>
