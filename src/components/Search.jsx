@@ -4,6 +4,8 @@ import SearchForm from './SearchForm'
 import HeadlineQueryList from './HeadlineQueryList';
 import axios from 'axios';
 
+import { connect } from 'react-redux'
+
 class Search extends React.Component {
   constructor () {
     super()
@@ -46,4 +48,17 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+const stateToProps = (state) => {
+  return {
+
+  }
+}
+
+const dispatchToProps = (state) => {
+  return {
+
+  }
+}
+
+
+export default connect(stateToProps, dispatchToProps)(Search);;

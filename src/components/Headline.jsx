@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import HeadlineList from './HeadlineList'
 
+import { connect } from 'react-redux'
+
 class Headline extends Component {
   constructor () {
     super()
@@ -42,4 +44,16 @@ class Headline extends Component {
   }
 }
 
-export default Headline;
+const stateToProps = (state) => {
+  return {
+
+  }
+}
+
+const dispatchToProps = (state) => {
+  return {
+
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Headline);
