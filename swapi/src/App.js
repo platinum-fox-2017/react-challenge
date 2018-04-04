@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch }  from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Link }  from 'react-router-dom';
+import { createStore } from 'redux';
+import { connect } from 'react-redux'
 import PeopleList from './components/PeopleList'
 import CharacterPage from './components/CharacterPage';
 import ErrPage from './components/ErrPage';
@@ -12,7 +14,9 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <header className="App-header">
-            <img src="https://pokemontcg.io/assets/images/pokemon-minimalist-30bc8a16a6a63e980a4e06c11a66638b.png" className="App-logo" alt="logo" />
+            <Link to="/">
+              <img src="https://pokemontcg.io/assets/images/pokemon-minimalist-30bc8a16a6a63e980a4e06c11a66638b.png" className="App-logo" alt="logo" />
+            </Link>
           </header>
           <Switch>
             <Route exact path="/" component={ PeopleList } />
