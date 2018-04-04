@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import getDataAction from '../redux/action'
 
-export default class Feed extends Component {
+class Feed extends Component {
   
   render() {
-    const { feeds } = this.props
-    console.log(feeds)
+    const feeds = this.props.payload
     return (
       <div>
         <div className="body">
-          { 
+          { feeds &&
             feeds.map((feed) => 
               <div key={feed.caption.id} className='box'>
               <Link to={`/images/${feed.caption.id}`}>
@@ -22,4 +23,23 @@ export default class Feed extends Component {
       </div>
     )
   }
+  componentDidMount(){
+    this.props.getData()
+  }
 };
+
+const mapStateToProps = (state) => {
+  return {
+    payload: state.payload
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getData: () => {
+      console.log(getDataAction())
+      dispatch(getDataAction())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feed);

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import gif from '../assets/images/Jake_wiggle.gif'
+import { connect } from 'react-redux'
+import getDataAction from '../redux/action'
 
-export default class Display extends Component {
+class Display extends Component {
   constructor() {
     super()
     this.state = {
@@ -39,21 +40,30 @@ export default class Display extends Component {
       </div>
     )
   }
-  componentDidMount (){
+  componentDidMount () {
     this.checkLoad(true)
-    axios.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=3441883492.ad56b48.5133663fa0024e4586e34a511c33638b')
-      .then(result => {
-        for (let i = 0; i < result.data.data.length; i++) {
-          if (result.data.data[i].caption.id === this.props.match.params.id) {
-            this.setState(prevState => ({
-              singleImage: [...prevState.singleImage, result.data.data[i]]
-            }))
-            this.checkLoad(false)
-          }
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    for (let i = 0; i < this.props.payload.length; i++) {
+      if (this.props.payload[i].caption.id === this.props.match.params.id) {
+        this.setState(prevState => ({
+          singleImage: [...prevState.singleImage, this.props.payload[i]]
+        }))
+        this.checkLoad(false)
+      }
+    }
   }
 };
+const mapStateToProps = (state) => {
+  return {
+    payload: state.payload
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getData: () => {
+      dispatch(getDataAction())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Display)
