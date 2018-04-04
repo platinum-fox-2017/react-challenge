@@ -8,16 +8,32 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux'
 
 const reducer = (state = {
-  characters: [],
-  activeCharacter: {},
-  isLoading: true
-}, action) => {
+    characters: [],
+    activeCharacter: {},
+    isLoading: true
+  }, action) => {
+
   switch(action.type) {
-    case 'FETCHCHARACTERS': {
-      console.log('Reducer ===> action:', action)
+    case 'LOADING': {
       const newState = { 
         ...state,
-        characters: [ ...state.characters, ...action.payload ]
+        isLoading: true
+      }
+      return newState
+    }
+    case 'FETCHCHARACTERS': {
+      const newState = { 
+        ...state,
+        characters: [ ...state.characters, ...action.payload ],
+        isLoading: false
+      }
+      return newState
+    }
+    case 'SEARCHCHARACTER': {
+      const newState = { 
+        ...state,
+        activeCharacter: { ...state.activeCharacter, ...action.payload},
+        isLoading: false
       }
       return newState
     }
@@ -31,6 +47,6 @@ const store = createStore(reducer)
 
 ReactDOM.render(
   <Provider store= { store }>
-  <App />
+    <App />
   </Provider>, document.getElementById('root'));
 registerServiceWorker();

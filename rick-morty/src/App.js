@@ -1,59 +1,27 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 
 import Home from './components/Home.jsx';
 import CharacterDetail from './components/CharcterDetail.jsx';
 
 import logo from './logo.svg';
 import './App.css';
-import connect from 'react-redux/lib/connect/connect';
-
-
-
-
 
 function fetchCharaters (payload) {
-  console.log('Actions ===> payload:', payload)
   return {
     type: 'FETCHCHARACTERS',
     payload: payload
   }
 }
 
+function loading (payload) {
+  return {
+    type: 'LOADING',
+  }
+}
+
 class App extends Component {
-  constructor () {
-    super();
-    this.state = {
-      characters: [],
-      activeCharacter: {},
-      isLoading: false
-    }
-  }
-
-  generateCharacter = () => {
-    this.changeLoadingStatus(true)
-    fetch(`https://rickandmortyapi.com/api/character`)
-    .then((response) => {
-      return response.json();
-    })
-    .then((character) => {
-      this.setState(prevState => ({
-        characters: [ ...prevState.characters, ...character.results ]
-      }))
-      this.changeLoadingStatus(false)
-    })
-    .catch((err) => {
-      window.alert(err)
-    });
-  }
-
-  changeLoadingStatus = (status) => {
-    this.setState({
-      isLoading: status
-    })
-  }
-  
   render() {
     return (
       <BrowserRouter>
@@ -64,7 +32,7 @@ class App extends Component {
             </Link>
           </header>
           <div>{
-            this.state.isLoading ?
+            !this.props.characters.length ?
             <div>
               <img src={logo} className="App-logo" alt="logo" />
               <p>Awesomeness is Coming . . .</p>
@@ -86,33 +54,27 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.generateCharacter();
-
     fetch(`https://rickandmortyapi.com/api/character`)
       .then((response) => {
         return response.json();
       })
       .then((characters) => {
-        console.log(characters.results)
         this.props.fetchCharaters(characters.results)        
       })
       .catch((err) => {
         window.alert(err)
       });
-
-    // this.props.fetchCharaters(test);
-  }
+    }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    characters: state.characters
-  }
-}
+const mapStateToProps = (state) => ({
+  characters: state.characters,
+  isLoading: state.isLoading
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCharaters: (payload) => dispatch(fetchCharaters(payload))
-})
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+  fetchCharaters: (payload) => dispatch(fetchCharaters(payload)),
+  loading: () => dispatch(loading())
+});
 
-// export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
