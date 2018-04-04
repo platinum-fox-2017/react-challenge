@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import ArticleCard from './ArticleCard'
+import { connect } from 'react-redux'
+import { fetchArticles } from '../redux/actions'
 
 class ArticleList extends Component {
 
   constructor(){
     super();
     this.state = {
-      articles: [],
       articlesID: [],
       error: null
     }
@@ -31,7 +32,7 @@ class ArticleList extends Component {
       fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
            .then(response => response.json())
            .then(result => {
-             app.setState( prevState => ({articles:[...prevState.articles, result]}))
+             app.props.fetchArticles(result) 
            })
            .catch(e => this.setState({error: e}))
     })
@@ -41,7 +42,7 @@ class ArticleList extends Component {
     this.fetchTopArticlesID()
   }
   render() {
-    const { articles, error } = this.state
+    const { articles } = this.props
     if (!articles.length) {
       return (
         <div className="table">
@@ -53,7 +54,7 @@ class ArticleList extends Component {
     } else {
       return (
         <div>
-          <ul class="breadcrumb">
+          <ul className="breadcrumb">
             <li><Link to="/" >Home</Link></li>
           </ul>
           <ArticleCard articles={articles}></ArticleCard>
@@ -62,4 +63,17 @@ class ArticleList extends Component {
     }
   }
 }
-export default ArticleList
+
+const mapStateToProps = (state) => {
+  return {
+    articles: state.articles
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchArticles: (articles) => dispatch(fetchArticles(articles))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleList)

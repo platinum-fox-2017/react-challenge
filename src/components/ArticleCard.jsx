@@ -5,10 +5,10 @@ const ArticleCard = (props) => {
   const {articles} = props
   return articles.map(article => {
     return (
-      <div className="table">
-          <div className="table-row" key={ article.id}>
-            <span style={{ width: '40%'}}>
-              <Link to={`/story/${article.id}`}>{ article.title}</Link>
+      <div className="table" key={ article.id }>
+          <div className="table-row" >
+            <span style={ { width: '40%'} }>
+              <Link to={'/story/'+ article.id} > { article.title} </Link>
             </span>
             <span style={{ width: '20%'}}>{ article.by}</span>
             <span style={{ width: '20%'}}>Score: { article.score}</span>

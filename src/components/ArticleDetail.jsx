@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import CommentList from './CommentList'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchComments } from '../redux/actions'
 
 class ArticleDetail extends Component {
 
   constructor(){
     super();
     this.state = {
-      comments: [],
       story: {},
       error: null
     }
@@ -32,7 +33,7 @@ class ArticleDetail extends Component {
       fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
            .then(response => response.json())
            .then(result => {
-             app.setState( prevState => ({comments:[...prevState.comments, result]}))
+             app.props.fetchComments(result)
            })
            .catch(e => this.setState({error: e}))
     })
@@ -68,10 +69,18 @@ class ArticleDetail extends Component {
               </div>
           </div>
           <h4>Comments</h4>
-          <CommentList comments={comments}></CommentList>
+          <CommentList ></CommentList>
         </div>
       )
     }
   }
 }
-export default ArticleDetail
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchComments: (comments) => dispatch(fetchComments(comments))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ArticleDetail)
