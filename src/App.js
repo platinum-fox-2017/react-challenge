@@ -6,6 +6,7 @@ import LeagueTable from './components/LeagueTable'
 import ClubDetail from './components/ClubDetail'
 import { Route, Switch } from 'react-router-dom'
 
+
 class App extends Component {
   render() {
     return (

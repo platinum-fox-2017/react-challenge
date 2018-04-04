@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { getLeagueTable } from '../redux/action';
+import { connect } from 'react-redux';
 
 class LeagueTable extends Component {
-  constructor () {
-    super()
-    this.state = {
-      leagueTable: []
-    }
-  }
-
   componentDidMount () {
     let idLeague = this.props.match.params.id
     axios({
@@ -20,12 +15,7 @@ class LeagueTable extends Component {
       }
     })
     .then(leagueTable => {
-      console.log(leagueTable)
-      this.setState(() => {
-        return {
-          leagueTable: leagueTable.data.standing
-        }
-      })
+      this.props.getLegTable(leagueTable.data.standing)
     })
     .catch(err => {
       console.log(err)
@@ -46,7 +36,7 @@ class LeagueTable extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.leagueTable.map( table => {
+          {this.props.leagueTable.map( table => {
             return (
               <tr key={table.position}>
                 <td>{table.position}</td>
@@ -70,4 +60,14 @@ class LeagueTable extends Component {
   }
 }
 
-export default LeagueTable;
+const mapStateToProps = (state) => {
+  return {
+    leagueTable: state.leagueTable
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  getLegTable: (payload) => dispatch(getLeagueTable(payload))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeagueTable);

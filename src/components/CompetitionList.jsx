@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import {
+  getCompetitionList
+} from '../redux/action'
 
 class CompetitionList extends Component {
-  constructor () {
-    super()
-    this.state = {
-      competitionList: []
-    }
-  }
-
   componentDidMount () {
     axios({
       method: `GET`,
@@ -20,11 +17,7 @@ class CompetitionList extends Component {
     })
     .then(competitions => {
       console.log(competitions.data)
-      this.setState(() => {
-        return {
-          competitionList: competitions.data
-        }
-      })
+      this.props.getCompList(competitions.data)
     })
     .catch(err => {
       console.log(err)
@@ -34,6 +27,7 @@ class CompetitionList extends Component {
   render() {
     return (
         <div className="container">
+          <h1>{this.props.message}</h1>
           <table className="table table-bordered">
             <thead>
               <tr>
@@ -44,7 +38,7 @@ class CompetitionList extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.competitionList.map( competition => {
+              {this.props.competitionList.map(competition => {
                 return (
                   <tr key={competition.id}>
                     <td>{competition.caption}</td>
@@ -61,4 +55,16 @@ class CompetitionList extends Component {
   }
 }
 
-export default CompetitionList;
+
+const mapStateToProps = (state) => {
+  return {
+    message: state.message,
+    competitionList: state.competitionList
+  }
+}
+
+const mapDispatchProps = (dispatch) => ({
+  getCompList: (payload) => dispatch(getCompetitionList(payload)),
+})
+
+export default connect(mapStateToProps, mapDispatchProps)(CompetitionList)

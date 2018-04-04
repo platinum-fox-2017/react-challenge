@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { getDetailClub } from '../redux/action'
+import { connect } from 'react-redux'
 
 class ClubDetail extends Component {
-  constructor () {
-    super()
-    this.state = {
-      team: {}
-    }
-  }
-    
+
   componentDidMount () {
     let teamsId = this.props.match.params.idteam
     axios({
@@ -19,12 +15,7 @@ class ClubDetail extends Component {
       }
     })
     .then(team => {
-      console.log(team.data)
-      this.setState(() => {
-        return {
-          team: team.data
-        }
-      })
+      this.props.getClubDetail(team.data)
     })
     .catch(err => {
       console.log(err)
@@ -35,12 +26,22 @@ class ClubDetail extends Component {
     return (
       <div className="container">
         <div className="col-md-8 col-md-offset-2">
-          <h1>{this.state.team.name}</h1>
-          <img className="img-responsive" width="400px" style={{margin:'0 auto'}}src={this.state.team.crestUrl} alt={`${this.state.team.name} logo`}/>
+          <h1>{this.props.team.name}</h1>
+          <img className="img-responsive" width="400px" style={{margin:'0 auto'}}src={this.props.team.crestUrl} alt={`${this.props.team.name} logo`}/>
         </div>
       </div>
     );
   }
 }
 
-export default ClubDetail;
+const mapStateToProps = (state) => {
+  return {
+    team: state.detailClub
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  getClubDetail: (payload) => dispatch(getDetailClub(payload))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClubDetail);
