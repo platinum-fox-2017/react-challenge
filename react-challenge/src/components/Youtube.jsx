@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const API = 'AIzaSyAqeflTMkQmxDmlCAUlEILEBEmGeoz3Mco'
 const channelID = 'UC29ju8bIPH5as8OGnQzwJyA'
@@ -36,9 +36,8 @@ export default class Youtube extends Component {
       <div>
         {
           this.state.resultYT.map((item, i) => {
-            console.log("item ",item);
             var frame = <div className="col-xs-6" key={i}><Link to={item.id.videoId}><h3>{item.snippet.title}</h3></Link><p>Channel : {item.snippet.channelTitle}</p>
-            <iframe width="280" height="160" src={ytLink+item.id.videoId} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+            <iframe width="280" height="160" src={ytLink+item.id.videoId} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen title="tutorial"></iframe>
             </div>
             return frame
           })

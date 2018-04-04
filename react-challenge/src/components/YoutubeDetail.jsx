@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-
 export default class YoutubeDetail extends Component {
   constructor () {
     super()
@@ -17,7 +16,6 @@ export default class YoutubeDetail extends Component {
     fetch(finalUrl)
       .then(res => res.json())
       .then(data => {
-        console.log('data ',data.items);
         this.setState({videoData: data.items})
       })
       .catch(err => console.error(err))
@@ -33,7 +31,7 @@ export default class YoutubeDetail extends Component {
             // console.log("yt detail, ",data);
             // console.log('==== ',this.props.match.params.id)
             var frame = <div className="col-xs-12" key={i}><h3>{data.snippet.title}</h3><p>Channel : {data.snippet.channelTitle}</p>
-            <iframe width="560" height="320" src={ytLink+this.props.match.params.id} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+            <iframe width="560" height="320" src={ytLink+this.props.match.params.id} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen title="tutorial"></iframe>
             <p>{data.snippet.description}</p>
             </div>
             return frame
