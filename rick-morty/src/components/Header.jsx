@@ -52,9 +52,9 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  characters: state.charactersReducer.characters,
-  isLoading: state.charactersReducer.isLoading,
-  pageIndex: state.charactersReducer.pageIndex
+  characters: state.charactersReducers.characters,
+  isLoading: state.charactersReducers.isLoading,
+  pageIndex: state.charactersReducers.pageIndex
 });
 
 const mapDispatchToProps = (dispatch) => ({

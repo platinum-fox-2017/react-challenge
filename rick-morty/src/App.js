@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchCharacters, loading } from './redux/characters/characters.actions';
 import axios from 'axios';
 
-import { loading, fetchCharaters } from './redux/actions';
+// import { loading, fetchCharaters } from './redux/actions';
 import Header from './components/Header.jsx';
 import Loading from './components/Loading.jsx';
 import Home from './components/Home.jsx';
@@ -39,7 +41,7 @@ class App extends Component {
   componentDidMount() {
     axios.get(`https://rickandmortyapi.com/api/character/?page=${this.props.pageIndex}`)
       .then(({ data }) => {
-        this.props.fetchCharaters(data.results)                
+        this.props.fetchCharacters(data.results)                
       })
       .catch((err) => {
         window.alert(err)
@@ -48,14 +50,14 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  characters: state.charactersReducer.characters,
-  isLoading: state.charactersReducer.isLoading,
-  pageIndex: state.charactersReducer.pageIndex
+  characters: state.charactersReducers.characters,
+  isLoading: state.charactersReducers.isLoading,
+  pageIndex: state.charactersReducers.pageIndex
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCharaters: (payload) => dispatch(fetchCharaters(payload)),
-  loading: () => dispatch(loading())
-});
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  loading,
+  fetchCharacters,
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

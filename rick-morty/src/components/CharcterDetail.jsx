@@ -47,8 +47,8 @@ class CharacterDetail extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  activeCharacter: state.charactersReducer.activeCharacter,
-  isLoading: state.charactersReducer.isLoading
+  activeCharacter: state.charactersReducers.activeCharacter,
+  isLoading: state.charactersReducers.isLoading
 });
 
 const mapDispatchToProps = (dispatch) => ({
