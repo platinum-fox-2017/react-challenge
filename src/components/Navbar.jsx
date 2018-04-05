@@ -40,7 +40,7 @@ class Navbar extends React.Component {
         </div>
         <div className={ this.state.menuClass } style={{backgroundColor:'none'}}>
           <div className="navbar-start">
-            <Link className="navbar-item" to="/">Home</Link>
+            <Link className="navbar-item" to="/">Top Headlines</Link>
             <Link className="navbar-item" to="/search">Search</Link>
           </div>
         </div>

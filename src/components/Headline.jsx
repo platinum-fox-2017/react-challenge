@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getNewsArsRdx, getNewsSearchRdx } from '../redux/index.js'
+import { getNewsArsRdx, getNewsSearchRdx } from '../redux/action.js'
 
 import HeadlineList from './HeadlineList'
 import SourceNavbar from './SourceNavbar'

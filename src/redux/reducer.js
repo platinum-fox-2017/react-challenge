@@ -7,7 +7,9 @@ export default function reducer (state={
   isLoading: false,
   err: null,
   newsArs: [],
-  newsSearch: []
+  newsSearch: [],
+  pages: 0,
+  currentPage: 0
 }, action) {
   switch (action.type) {
     case GET_NEWS_OK: {
@@ -33,7 +35,8 @@ export default function reducer (state={
     case SEARCH_NEWS_OK: {
       return {
         ...state,
-        newsSearch: action.payload,
+        newsSearch: action.payload.articles,
+        pages: action.payload.pages,
         isLoading: false
       }
     }
