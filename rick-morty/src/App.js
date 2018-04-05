@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCharacters, loading } from './redux/characters/characters.actions';
 import axios from 'axios';
 
-// import { loading, fetchCharaters } from './redux/actions';
+import { fetchCharacters, loading } from './redux/characters/characters.actions';
 import Header from './components/Header.jsx';
 import Loading from './components/Loading.jsx';
 import Home from './components/Home.jsx';

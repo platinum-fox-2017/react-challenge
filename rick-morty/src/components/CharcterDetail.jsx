@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios'
+import { bindActionCreators } from 'redux';
 
-import { loading, searchCharacter } from '../redux/actions';
-
+import { loading, searchCharacter } from '../redux/characters/characters.actions';
 import Loading from './Loading.jsx';
 import '../CharacterDetail.css';
 
@@ -51,9 +51,9 @@ const mapStateToProps = (state) => ({
   isLoading: state.charactersReducers.isLoading
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  searchCharacter: (payload) => dispatch(searchCharacter(payload)),
-  loading: () => dispatch(loading())
-});
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  loading,
+  searchCharacter
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharacterDetail);
