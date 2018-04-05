@@ -1,5 +1,11 @@
 
-const reducer = (state = { articles: [], comments: [] }, action) => {
+const initialState = {
+  articles: [],
+  comments: [],
+  loading: false,
+  error: false
+}
+const reducer = (state = initialState, action) => {
   if(action.type === 'FETCH_STORIES') {
     return {...state, articles: [...state.articles, action.articles]}
   }

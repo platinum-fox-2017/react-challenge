@@ -1,14 +1,15 @@
-
+import { FETCH_STORIES, FETCH_COMMENTS } from './actionTypes'
 const fetchArticles = (articles) => {
+
  return {
-    type: 'FETCH_STORIES',
+    type: FETCH_STORIES,
     articles
   }
 }
 
 const fetchComments = (comments) => {
  return {
-    type: 'FETCH_COMMENTS',
+    type: FETCH_COMMENTS,
     comments
   }
 }
