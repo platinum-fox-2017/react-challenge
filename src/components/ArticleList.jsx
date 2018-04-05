@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ArticleCard from './ArticleCard'
 import { connect } from 'react-redux'
 import { fetchArticles } from '../redux/actions'
+import { RingLoader } from 'react-spinners'
 
 class ArticleList extends Component {
 
@@ -45,11 +46,12 @@ class ArticleList extends Component {
     const { articles } = this.props
     if (!articles.length) {
       return (
-        <div className="table">
-            <div className="table-row">
-              <span style={{ width: '100%'}}>No Story Found</span>
-            </div>
+        <div>
+          <div className="centered">
+            <RingLoader />
+          </div>
         </div>
+
       )
     } else {
       return (
@@ -57,6 +59,7 @@ class ArticleList extends Component {
           <ul className="breadcrumb">
             <li><Link to="/" >Home</Link></li>
           </ul>
+
           <ArticleCard articles={articles}></ArticleCard>
         </div>
       )

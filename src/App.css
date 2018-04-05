@@ -81,3 +81,10 @@ ul.breadcrumb li a:hover {
    color: #01447e;
    text-decoration: underline;
 } 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
