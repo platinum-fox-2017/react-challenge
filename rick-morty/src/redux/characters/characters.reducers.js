@@ -1,7 +1,12 @@
-import { LOADING, FETCH_CHARACTERS, SEARCH_CHARACTER, GO_PAGE, ERROR } from './characters.actionTypes';
+import {
+  LOADING,
+  FETCH_CHARACTERS,
+  SEARCH_CHARACTER,
+  GO_PAGE, ERROR
+} from './characters.actionTypes';
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   pageIndex: 1,
   characters: [],
   activeCharacter: {},

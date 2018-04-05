@@ -5,17 +5,45 @@ import {
   GO_PAGE,
   ERROR
 } from './characters.actionTypes';
+import axios from 'axios';
 
 export const loading = () => {
   return { type: LOADING }
 }
 
-export const fetchCharacters = (payload) => ({
-  type: FETCH_CHARACTERS,
-  payload: payload
-})
+export const fetchingCharacters = (payload) => {
+  return dispatch => {
+    axios.get(`https://rickandmortyapi.com/api/character/?page=${payload}`)
+      .then(({ data }) => {
+        dispatch(fetchCharacters(data.results))
+      })
+      .catch((err) => {
+        window.alert(err)
+      });
+  }
+};
 
-export const searchCharacter = (payload) => {
+const fetchCharacters = (payload) => {
+  console.log('masuk Actions ===> ', payload)
+  return {
+    type: FETCH_CHARACTERS,
+    payload: payload
+  }
+}
+
+export const searchingCharacter = (payload) => {
+  return dispatch => {
+    axios.get(`https://rickandmortyapi.com/api/character/${payload}`)
+      .then(({ data }) => {
+        dispatch(searchCharacter(data))
+      })
+      .catch((err) => {
+        window.alert(err)
+      });
+  }
+}
+
+const searchCharacter = (payload) => {
   return {
     type: SEARCH_CHARACTER,
     payload: payload

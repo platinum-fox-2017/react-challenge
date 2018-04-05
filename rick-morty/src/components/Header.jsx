@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/img/rick.png';
 import { connect } from 'react-redux';
-import axios from 'axios'
+// import axios from 'axios'
 import { bindActionCreators } from 'redux';
 
-import { loading, fetchCharacters, goPage } from '../redux/characters/characters.actions';
+import { loading, fetchingCharacters, goPage } from '../redux/characters/characters.actions';
 // import NavBar from './NavBar.jsx';
 
 class Header extends Component {
@@ -24,14 +24,7 @@ class Header extends Component {
       page = 1
     }
     this.props.goPage(page);
-    this.props.loading()
-    axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`)
-      .then(({ data }) => {
-        this.props.fetchCharacters(data.results)                
-      })
-      .catch((err) => {
-        window.alert(err)
-      });
+    this.props.fetchingCharacters(page);
   }
 
   render() {
@@ -59,7 +52,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchCharacters,
+  fetchingCharacters,
   goPage,
   loading
 }, dispatch);

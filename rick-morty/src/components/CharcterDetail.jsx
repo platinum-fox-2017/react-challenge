@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios'
 import { bindActionCreators } from 'redux';
 
-import { loading, searchCharacter } from '../redux/characters/characters.actions';
+import { loading, searchingCharacter } from '../redux/characters/characters.actions';
 import Loading from './Loading.jsx';
 import '../CharacterDetail.css';
 
@@ -34,15 +34,8 @@ class CharacterDetail extends Component {
   }
 
   componentDidMount() {
-    let id = this.props.match.params.id
-
-    axios.get(`https://rickandmortyapi.com/api/character/${id}`)
-      .then(({ data }) => {
-        this.props.searchCharacter(data);              
-      })
-      .catch((err) => {
-        window.alert(err)
-      });
+    let id = this.props.match.params.id;
+    this.props.searchingCharacter(id);
   }
 }
 
@@ -53,7 +46,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   loading,
-  searchCharacter
+  searchingCharacter
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharacterDetail);
