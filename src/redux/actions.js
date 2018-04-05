@@ -4,7 +4,7 @@ const fetchArticles = (articles) => {
   return dispatch => {
     
     dispatch(loading)
-    fetch('https://hacker-new.firebaseio.com/v0/topstories.json?print=pretty')
+    fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
       .then(response => response.json())
       .then(result => {
         dispatch(fetchDetailArticles(result.slice(0, 9)))
