@@ -3,7 +3,8 @@ import {
   FETCH_UNIVERSITIES_LOADING,
   FETCH_UNIVERSITIES_SUCCESS,
   CLEAR_UNIVERSITIES_LIST,
-  UPDATE_PAGINATE_LIST
+  UPDATE_PAGINATE_LIST,
+  CLEAR_PAGINATE_LIST
  } from '../universities.actionTypes'
 
 const initState = {
@@ -38,7 +39,12 @@ const reducers = (state={...initState}, action) => {
         ...state,
         universitiesList: []
       }
-    case UPDATE_PAGINATE_LIST:
+    case CLEAR_PAGINATE_LIST:
+      return {
+        ...state,
+        paginateList: []
+      }
+    case UPDATE_PAGINATE_LIST:  
       return {
         ...state,
         paginateList: action.payload.concat()
