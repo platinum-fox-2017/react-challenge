@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getDetailClub } from '../redux/clubdetail/clubdetail.action';
 import { bindActionCreators } from 'redux';
+import { DotLoader } from 'react-spinners';
 import { connect } from 'react-redux';
 
 class ClubDetail extends Component {
@@ -13,7 +14,12 @@ class ClubDetail extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <h1>fetching data..</h1>
+        <div>
+          <h1>fetching data..</h1>
+          <div className='sweet-loading'  style={{ 'marginLeft': '850px'}}>
+          <DotLoader color={'#123abc'}/>
+          </div>
+        </div>
       )
     } else if (this.props.error) {
       return (

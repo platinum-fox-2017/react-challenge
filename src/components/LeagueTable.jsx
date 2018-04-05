@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getLeagueTable } from '../redux/leaguetable/leaguetable.action';
 import { bindActionCreators } from 'redux';
+import { DotLoader } from 'react-spinners';
 import { connect } from 'react-redux';
 
 class LeagueTable extends Component {
@@ -13,7 +14,12 @@ class LeagueTable extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <h1>fetching data...</h1>
+        <div>
+          <h1>fetching data..</h1>
+          <div className='sweet-loading'  style={{ 'marginLeft': '850px'}}>
+          <DotLoader color={'#123abc'}/>
+          </div>
+        </div>
       )
     } else if (this.props.error) {
       return (
