@@ -7,7 +7,7 @@ class Articles extends Component {
             <div className="media">
                 <div className="media-left media-top">
                     <a href={this.props.article.url} target="_blank">
-                        <img className="media-object" src={this.props.article.urlToImage} alt={this.props.article.urlToImage} min-width="200" height="100" />
+                        <img className="media-object" src={this.props.article.urlToImage} alt={this.props.article.urlToImage} min-width="250" height="125" />
                     </a>
                 </div>
                 <div className="media-body">

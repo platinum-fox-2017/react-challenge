@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getNews = () => {
     return dispatch => {
         dispatch(loading());
-        axios.get('https://newsapi.org/v2/top-headlines?sources=mashable&apiKey=2e9aaee5201948d48f187726b0896988')
+        axios.get('https://newsapi.org/v2/everything?sources=espn&apiKey=2e9aaee5201948d48f187726b0896988')
             .then(response => {
                 dispatch(success(response.data.articles))
             }).catch(err => {

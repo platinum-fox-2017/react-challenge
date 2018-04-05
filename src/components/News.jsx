@@ -4,6 +4,7 @@ import { getNews, getNewsById } from '../store/news/news.actions';
 import Articles from './Articles';
 import NewsButtonSwitch from './NewsButtonSwitch';
 import { bindActionCreators } from 'redux';
+import Loader from 'react-loader-spinner';
 
 class News extends Component {
 
@@ -21,7 +22,7 @@ class News extends Component {
             return (
                 <div className="news-container">
                     <NewsButtonSwitch id={this.props.match.params.id} />
-                    <h3>Loading...</h3>
+                    <Loader type="ThreeDots" color="#3F51B5" height={80} width={80} />
                 </div>
             )
         }

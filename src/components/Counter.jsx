@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getData, increment, decrement } from '../store/counter/counter.actions';
 import { bindActionCreators } from 'redux';
+import Loader from 'react-loader-spinner';
 
 class Counter extends Component {
 
@@ -10,12 +11,10 @@ class Counter extends Component {
     }
 
     increment = () => {
-        // firebase.database().ref('counter').set(this.props.count + 1)
         this.props.increment(this.props.count.data)
     }
 
     decrement = () => {
-        // firebase.database().ref('counter').set(this.props.count - 1)
         this.props.decrement(this.props.count.data)
     }
 
@@ -24,7 +23,7 @@ class Counter extends Component {
             return (
             <div>
                 <h1>Hi! I'm a counter</h1>
-                <h2>Loading...</h2>
+                <Loader type="TailSpin" color="#3F51B5" height={48} width={48} />
                 <button onClick={this.decrement} style={{ margin: 7, width: 30, height: 30 }}> - </button>
                 <button onClick={this.increment} style={{ margin: 7, width: 30, height: 30 }}> + </button>
             </div> 
