@@ -1,0 +1,7 @@
+export const GET_NEWS_OK = 'GET_NEWS_SUCCESS';
+export const GET_NEWS_LOAD = 'GET_NEWS_LOADING';
+export const GET_NEWS_ERR = 'GET_NEWS_ERROR';
+
+export const SEARCH_NEWS_OK = 'SEARCH_NEWS_SUCCESS';
+export const SEARCH_NEWS_LOAD = 'SEARCH_NEWS_LOADING';
+export const SEARCH_NEWS_ERR = 'SEARCH_NEWS_ERROR';
