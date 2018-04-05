@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {
   getCompetitionList
 } from '../redux/action'
 
 class CompetitionList extends Component {
   componentDidMount () {
-    axios({
-      method: `GET`,
-      url: `http://api.football-data.org/v1/competitions/?season=2017`,
-      headers: {
-        "X-Auth-Token": `dd78cdc8e7c447598bb2874da0744086`
-      }
-    })
-    .then(competitions => {
-      console.log(competitions.data)
-      this.props.getCompList(competitions.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    this.props.getCompList()
   }
 
   render() {
-    return (
+    if (this.props.loading) {
+      return (
+        <h1>fetching data..</h1>
+      );
+    } else if (this.props.error) {
+      return (
+        <h1>error fetching the data</h1>
+      );
+    } else {
+      return (
         <div className="container">
           <h1>{this.props.message}</h1>
           <table className="table table-bordered">
             <thead>
               <tr>
-                <th className="text-center">Competition List</th>
+                <th className="text-center">League Name</th>
                 <th className="text-center">Number of Teams</th>
                 <th className="text-center">Played Matchdays</th>           
                 <th className="text-center">Action</th>           
@@ -51,7 +46,8 @@ class CompetitionList extends Component {
             </tbody>
           </table>
         </div>
-    );
+      );
+    }
   }
 }
 
@@ -59,12 +55,14 @@ class CompetitionList extends Component {
 const mapStateToProps = (state) => {
   return {
     message: state.message,
-    competitionList: state.competitionList
+    competitionList: state.competitionList,
+    loading: state.loading_data,
+    error: state.error_data
   }
 }
 
 const mapDispatchProps = (dispatch) => ({
-  getCompList: (payload) => dispatch(getCompetitionList(payload)),
+  getCompList: () => dispatch(getCompetitionList()),
 })
 
 export default connect(mapStateToProps, mapDispatchProps)(CompetitionList)

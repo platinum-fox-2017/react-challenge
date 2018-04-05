@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { getLeagueTable } from '../redux/action';
 import { connect } from 'react-redux';
@@ -7,67 +6,68 @@ import { connect } from 'react-redux';
 class LeagueTable extends Component {
   componentDidMount () {
     let idLeague = this.props.match.params.id
-    axios({
-      method: `GET`,
-      url: `http://api.football-data.org/v1/competitions/${idLeague}/leagueTable`,
-      headers: {
-        "X-Auth-Token": `dd78cdc8e7c447598bb2874da0744086`
-      }
-    })
-    .then(leagueTable => {
-      this.props.getLegTable(leagueTable.data.standing)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    this.props.getLegTable(idLeague)
   }
 
   render() {
-    return (
-      <div className="container">
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th className="text-center" style={{width:`10px`}}>Position</th>
-            <th className="text-center" style={{width:`300px`}}>Team Name</th>
-            <th className="text-center" style={{width:`10px`}}>Played Games</th>           
-            <th className="text-center" style={{width:`10px`}}>Points</th>           
-            <th className="text-center" style={{width:`10px`}}>Action</th>           
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.leagueTable.map( table => {
-            return (
-              <tr key={table.position}>
-                <td>{table.position}</td>
-                <td>{table.teamName}</td>
-                <td>{table.playedGames}</td>
-                <td>{table.points}</td>
-                <td>
-                  <Link to={`/detail/${table._links.team.href.split('/').pop()}`}>
-                    <button className="btn btn-primary">
-                      Club Detail
-                    </button>
-                  </Link>
-                </td>
+    if (this.props.loading) {
+      return (
+        <h1>fetching data...</h1>
+      )
+    } else if (this.props.error) {
+      return (
+        <h1>error fetching the data</h1>
+      )
+    } else {
+      return (
+        <div className="container">
+          <table className="table table-bordered">
+            <thead>
+              <tr>
+                <th className="text-center" style={{width:`10px`}}>Position</th>
+                <th className="text-center" style={{width:`300px`}}>Team Name</th>
+                <th className="text-center" style={{width:`10px`}}>Played Games</th>           
+                <th className="text-center" style={{width:`10px`}}>Points</th>           
+                <th className="text-center" style={{width:`10px`}}>Action</th>           
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </div>
-    );
+            </thead>
+            <tbody>
+              {this.props.leagueTable.map( table => {
+                return (
+                  <tr key={table.position}>
+                    <td>{table.position}</td>
+                    <td>{table.teamName}</td>
+                    <td>{table.playedGames}</td>
+                    <td>{table.points}</td>
+                    <td>
+                      <Link to={`/detail/${table._links.team.href.split('/').pop()}`}>
+                        <button className="btn btn-primary">
+                          Club Detail
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    leagueTable: state.leagueTable
+    leagueTable: state.leagueTable,
+    loading: state.loading_data,
+    error: state.error_data
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getLegTable: (payload) => dispatch(getLeagueTable(payload))
+  getLegTable: (id) => dispatch(getLeagueTable(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeagueTable);
