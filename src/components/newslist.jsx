@@ -1,50 +1,59 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchAllArticles} from '../actions/index'
+import SearchForm from './SearchForm'
+import {bindActionCreators} from 'redux'
+import {loadNews, searchnews, getNewsByCategory} from '../stores/news/news.action'
 
 class newsList extends Component {
-  componentDidMount() {
-    axios({
-      method:'get',
-      url:'https://newsapi.org/v2/top-headlines?country=us&apiKey=c007386430cc42208dfe32ba97c739eb'
-    }).then(response=>{
-        this.props.loadArticles(response.data.articles)
-    }).catch(err=>console.log(err))
+  componentDidMount () {
+    this.props.loadNews()
   }
-
+  getNewsByCategory = (category) => {
+    this.props.getNewsByCategory(category)
+  }
+  searchArticles = (query) => {
+    this.props.searchnews(query)
+  }
   render() {
-    const {articles} = this.props
-    return (
-      <div className="container content">
-        <div className="row">
-         {
-          (articles.length> 0 ) ?
-           articles.map(function (article, index){
-             return <div className="col col-md-3 newsItem text-left" key={index}>
-                      <img key={article.title} alt={article.title} src={article.urlToImage} height="140" width="260"/>
-                      <Link to={`/article/${index}`}> { article.title }</Link>
-                    </div>
-           }) : <h1>Loading...</h1>
-          }
+    const category = this.props.match.params.category
+    const {articles}= this.props.articles
+    if(this.props.articles.loading){
+      return <img src="https://www.fotawildlife.ie/assets/images/site/fotabook-loading.gif" alt="loading"/>
+    }else if(this.props.articles.error){
+      return <h1>oops..error </h1>
+    }else{
+      return (
+        <div className="container content">
+        <div>
+          <SearchForm getCategory= {this.getNewsByCategory} search={ this.searchArticles }/>
         </div>
-      </div>
-    )
+          <div className="row">
+           {
+             articles.map(function (article, index){
+               return <div className="col col-md-3 newsItem text-left" key={index}>
+                        <img key={article.title} alt={article.title} src={article.urlToImage} height="140" width="260"/>
+                        <Link to={`${category}/article/${article.title}`}> { article.title }</Link>
+                      </div>
+             })
+            }
+          </div>
+        </div>
+      )
+    }
+    
   }
 }
 
-const mapStateToProps = state => {
-  return{
-    articles: state.articles
-  }
-}
+const mapStateToProps = (state) => ({
+  articles: state.articles
+})
 
 
-const mapDispatchToProps = dispatch => {
-  return{
-    loadArticles: (payload) => dispatch(fetchAllArticles(payload))
-  }
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators ({
+  loadNews,
+  searchnews,
+  getNewsByCategory
+}, dispatch)
 
 export default  connect (mapStateToProps, mapDispatchToProps)(newsList)

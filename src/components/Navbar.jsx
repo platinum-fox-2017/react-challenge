@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 
 export default class Navbar extends Component {
+  constructor () {
+    super()
+    this.state = {
+      query: ''
+    }
+  }
+  
+  handlehange = (event) => {
+    this.setState({
+      [event.target.name] : event.target.value
+    })
+  }
   render() {
     return (
       <div className="container content">

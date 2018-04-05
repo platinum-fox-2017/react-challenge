@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
 import Newslist from './components/newslist'
 import Detailnews from './components/DetailNews'
 import Notfound from './components/Notfound'
-import SearchPage from './components/SearchPage'
-import Navbar from './components/Navbar'
 class App extends Component {
   render() {
     return (
@@ -14,14 +12,14 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">News API</h1>
+          <Link to ='/'><h1 className="App-title">News API</h1></Link>
         </header>
-          <Navbar/>
         <div>
             <Switch>
               <Route exact path='/' component={Newslist} />
-              <Route exact path='/search' component={SearchPage} />
-              <Route path='/article/:id' component={Detailnews} />
+              <Route exact path='/:category' component={Newslist} />
+              <Route exact path='/search' component={Newslist} />
+              <Route path='/:category/article/:title' component={Detailnews} />
               <Route component={Notfound}/>
             </Switch>
         </div>

@@ -1,32 +1,30 @@
 import React, { Component } from 'react';
 import SearchForm from './SearchForm'
-import axios from 'axios';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {fetchAllArticles} from '../actions/index'
+import {bindActionCreators} from 'redux'
+import {searchnews} from '../stores/news/news.action'
 
 class SearchPage extends Component {
-  searchNews(query) {
-    axios({
-      method:'get',
-      url:`https://newsapi.org/v2/everything?q=${query}&apiKey=c007386430cc42208dfe32ba97c739eb`,
-    }).then(response=>{
-      console.log(response)
-      // this.props.loadArticles(response.data.articles)
-    }).catch(err=>console.log(err))
+  searchArticles = (query) => {
+    this.props.searchnews(query)
   }
   render() {
-    const {articles} = this.props
+    const {articles} = this.props.articles
+    if(this.props.articles.loading){
+      return <img src="https://www.fotawildlife.ie/assets/images/site/fotabook-loading.gif" alt="loading"/>
+    }else if(this.props.articles.error){
+      return <h1>oops..error </h1>
+    }else{
     return (
       <div>
-        <SearchForm searchNews={ this.searchNews }/>
+        <SearchForm search={ this.searchArticles }/>
         <div className="container content">
         <div className="row">
          {
-           articles.map(function (article, index){
-             return <div className="col col-md-3 newsItem text-left" key={index}>
-                      <img key={article.title} alt={article.title} src={article.urlToImage} height="140" width="260"/>
-                      <Link to={`/article/${index}`}> { article.title }</Link>
+           articles.map(function (article){
+             return <div className="col col-md-3 newsItem text-left" key={article.url}>
+                      <img alt={article.title} src={article.urlToImage} height="140" width="260"/>
+                      <p>{ article.title }</p>
                     </div>
            })
           }
@@ -35,15 +33,14 @@ class SearchPage extends Component {
       </div>
     )
   }
+  }
 };
 const mapStateToProps = state => ({
   articles: state.articles
 })
 
-const mapDispatchToProps = dispatch => {
-return{
-  loadArticles: (payload) => dispatch(fetchAllArticles(payload))
-}
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators ({
+  searchnews
+}, dispatch)
 
-export default  connect (mapStateToProps, mapDispatchToProps)(SearchPage)
+export default connect (mapStateToProps, mapDispatchToProps)(SearchPage)
