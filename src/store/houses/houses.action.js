@@ -12,7 +12,7 @@ export const loadHouses = (payload) => {
   return dispatch => {
 
     dispatch(loadHousesLoading())
-    axios.get('https://api.gota.show/api/houses/')
+    axios.get('https://api.got.show/api/houses/')
     .then(response => {
       dispatch(loadHousesOK(response))
     })
@@ -20,7 +20,6 @@ export const loadHouses = (payload) => {
       dispatch(loadHousesErr())
     })
   }
-
 }
 
 const loadHousesOK = (payload) => ({

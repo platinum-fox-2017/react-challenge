@@ -4,7 +4,8 @@ class About extends Component {
   render() {
     return (
       <div>
-      <h1>I AM YOUR FATHER LUKE</h1>
+        <h1>YOU KNOW NOTHING JON SNOW</h1>
+        <img src="https://media0.giphy.com/media/xTcnTehwgRcbgymhTW/giphy.gif" alt=""/>
       </div>
     );
   }
