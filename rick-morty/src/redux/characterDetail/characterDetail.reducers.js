@@ -1,13 +1,23 @@
 import {
   LOADING,
-  FETCH_CHARACTERS,
-  GO_PAGE, ERROR
-} from './characters.actionTypes';
+  SEARCH_CHARACTER,
+  ERROR
+} from './characterDetail.actionTypes';
 
 const initialState = {
   isLoading: true,
-  pageIndex: 1,
-  characters: [],
+  character: {
+    location: {
+      image: '',
+      name: '',
+      status: '',
+      species: '',
+      gender: '',
+      location: {
+        name: ''
+      }
+    }
+  },
   error: false,
 };
 
@@ -19,17 +29,11 @@ const reducers = (state = { ...initialState }, action) => {
         isLoading: true 
       }
     }
-    case FETCH_CHARACTERS: {
+    case SEARCH_CHARACTER: {
       return { 
         ...state,
-        characters: [ ...action.payload ],
+        character: action.payload,
         isLoading: false
-      }
-    }
-    case GO_PAGE: {
-      return { 
-        ...state,
-        pageIndex: action.payload
       }
     }
     case ERROR: {

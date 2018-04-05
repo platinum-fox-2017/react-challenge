@@ -1,31 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/img/rick.png';
-import { connect } from 'react-redux';
-// import axios from 'axios'
-import { bindActionCreators } from 'redux';
 
-import { loading, fetchingCharacters, goPage } from '../redux/characters/characters.actions';
-// import NavBar from './NavBar.jsx';
-
-class Header extends Component {
-  goTo = (toPage) => {
-    let page = this.props.pageIndex;
-    if(toPage === 'prev') {
-      page--
-    } else {
-      page++
-    }
-    
-    if(page < 1) {
-      page = 20;
-    }
-    else if (page > 20) {
-      page = 1
-    }
-    this.props.goPage(page);
-    this.props.fetchingCharacters(page);
-  }
+export default class Header extends Component {
 
   render() {
     return (
@@ -35,26 +12,8 @@ class Header extends Component {
             <img src={logo} className="App-logo" alt="logo" />
           </Link>
         </div>
-        <div>
-          <button className="go-btn" onClick={ () => this.goTo('prev') }>PREV</button>
-          <button className="go-btn" onClick={ () => this.goTo('next') }>NEXT</button>        
-        </div>
         {/* <NavBar/> */}
       </header>
     )
   }
 }
-
-const mapStateToProps = (state) => ({
-  characters: state.charactersReducers.characters,
-  isLoading: state.charactersReducers.isLoading,
-  pageIndex: state.charactersReducers.pageIndex
-});
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchingCharacters,
-  goPage,
-  loading
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
