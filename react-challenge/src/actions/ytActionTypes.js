@@ -1,0 +1,2 @@
+export const FETCH_YT_VIDEOS = 'FETCH_YT_VIDEOS'
+
