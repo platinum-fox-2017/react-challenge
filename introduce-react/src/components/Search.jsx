@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 class SearchTeam extends React.Component {
   constructor() {
     super()
@@ -10,9 +9,10 @@ class SearchTeam extends React.Component {
   }
 
   input = (e) => {
-    this.state.search = e.target.value
+    this.setState({
+      search: e.target.value
+    })
   }
-
 
   render () {
     return (

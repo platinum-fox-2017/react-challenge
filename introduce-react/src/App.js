@@ -4,7 +4,7 @@ import './App.css';
 import ListTeam from './components/ListTeam'
 import Lost from './components/Lost'
 import Home from './components/Home'
-import Player from './components/Player'
+import ListPlayer from './components/ListPlayer'
 import { BrowserRouter,Route,Switch,Link } from 'react-router-dom'
 
 class App extends Component {
@@ -24,14 +24,14 @@ class App extends Component {
             </li>
             <li>
               <Link to={'/team'}>
-                List Dota Team
+                List Dota2 Team
               </Link>
             </li>
           </ul>
           <Switch>
             <Route exact path="/" component={ Home }/>
             <Route path="/team" component={ ListTeam }/>
-            <Route path="/player/:id_team" component={ Player }/>
+            <Route path="/player/:id_team" component={ ListPlayer }/>
             <Route component={Lost}/>
           </Switch>
         </div>

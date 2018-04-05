@@ -30,3 +30,7 @@
 .title {
   display: inline
 }
+
+.form-row {
+  justify-content: flex-end;
+}

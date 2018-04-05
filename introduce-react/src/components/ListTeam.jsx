@@ -1,31 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { insertData } from '../redux/Action'
-import { searchTeam } from '../redux/Action'
+import { bindActionCreators } from 'redux';
+import { loadTeam,loadNewTeam } from '../store/teams/teams.action'
 import Search from './Search'
-import axios from 'axios'
 
 
 class ListTeam extends React.Component {
   componentDidMount() {
-    axios({
-      method: 'get',
-      url: 'https://api.opendota.com/api/teams'
-    }).then(({ data }) => {
-      const newData = data.slice(0, 30)
-      this.props.insertData(newData)
-    })
+    this.props.loadTeam()
   }
 
   submitInput = (value) => {
-    const filterTeam = this.props.data_team.filter((team, index) => {
-      if (team.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
-        return team
-      }
+    const filterTeam = this.props.team.data.filter((team, index) => {
+      return team.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     })
-    console.log(filterTeam)
-    this.props.insertData(filterTeam)
+    this.props.loadNewTeam(filterTeam)
   }
 
   render () {
@@ -33,16 +23,17 @@ class ListTeam extends React.Component {
       <div className="container">
         <Search
           searchit={this.submitInput}></Search>
-        <h1>Dota 2 Pro Teams</h1>
-        { this.props.data_team &&
-          (this.props.data_team.length === 0) ? (<div>
+        <h4>Dota Teams</h4>
+        {
+          this.props.team.data &&
+          (this.props.team.data.length === 0) ? (<div>
             <img src="http://media.lastgif.com/gifs/21715.gif" alt="team" width="500" height="250"/>
-            <h1>please wait..</h1>
+            <h1>Loading..</h1>
           </div>) :
           <table className="table table-striped table-dark">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">Rank</th>
                 <th scope="col">Icon</th>
                 <th scope="col">Name</th>
                 <th scope="col">Wins</th>
@@ -51,10 +42,11 @@ class ListTeam extends React.Component {
               </tr>
             </thead>
             <tbody>
-              { this.props.data_team &&
-                this.props.data_team.map((data, i) => {
+              {
+                this.props.team.data &&
+                this.props.team.data.map((data, i) => {
                   return (
-                    <tr key={data.name}>
+                    <tr key={i}>
                       <th>{ i+1 }</th>
                       <td>
                         <img height="42" alt="img" src={ data.logo_url }/>
@@ -81,22 +73,14 @@ class ListTeam extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    data_team: state.data_team
-  }
-}
+const mapStateToProps = (state) => ({
+  team: state.team
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    insertData: (payload) => {
-      dispatch(insertData(payload))
-    },
-    filterData: (payload) => {
-      dispatch(searchTeam(payload))
-    }
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  loadTeam,
+  loadNewTeam
+}, dispatch)
 
-  }
-}
 
 export default connect(mapStateToProps,mapDispatchToProps)(ListTeam);
