@@ -2,6 +2,8 @@ import {
   CLEAR_SEARCH,
   SEARCH_STORY, 
   ERROR, 
+  CLEAR_STORIES,
+  CLEAR_COMMENTS,
   FETCH_STORY, 
   FETCH_STORIES, 
   FETCH_COMMENTS, 
@@ -12,6 +14,7 @@ const fetchArticles = (articles) => {
   return dispatch => {
     
     dispatch(loading)
+    dispatch(clearStory())
     fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
       .then(response => response.json())
       .then(result => {
@@ -83,6 +86,18 @@ const searchStory = (query) => {
   return {
     type: SEARCH_STORY,
     query
+  }
+}
+
+const clearStory = () => {
+  return {
+    type: CLEAR_STORIES,
+  }
+}
+
+const clearComment = () => {
+  return {
+    type: CLEAR_COMMENTS,
   }
 }
 

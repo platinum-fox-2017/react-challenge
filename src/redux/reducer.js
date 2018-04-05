@@ -1,5 +1,7 @@
 import { 
+  CLEAR_STORIES,
   CLEAR_SEARCH,
+  CLEAR_COMMENTS,
   SEARCH_STORY, 
   ERROR, 
   FETCH_STORY, 
@@ -39,6 +41,14 @@ const reducer = (state = initialState, action) => {
 
   if(action.type === CLEAR_SEARCH) {
     return {...state, searchArticles: [], isSearch: false}
+  }
+
+  if(action.type === CLEAR_STORIES) {
+    return {...state, articles: [] }
+  }
+
+  if(action.type === CLEAR_COMMENTS) {
+    return {...state, comments: [] }
   }
 
   if(action.type === FETCH_STORY) {
