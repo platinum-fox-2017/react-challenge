@@ -19,8 +19,8 @@ const CommentList = (props) => {
   } else if (comments.length) {
     return comments.map(comment => {
       return (
-        <div className="table">
-            <div className="table-row" key={ comment.id}>
+        <div className="table" key={ comment.id}>
+            <div className="table-row" >
               <span style={{ width: '50%'}}>
                 {  comment.text}
               </span>
