@@ -16,3 +16,13 @@
 .child {
   display: inline-block;
 }
+
+.xshort {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.short {
+  padding-left: 10%;
+  padding-right: 10%;
+}

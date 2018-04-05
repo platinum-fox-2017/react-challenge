@@ -34,14 +34,17 @@ class HeadlineList extends React.Component {
                         <img src={ news.urlToImage } alt={ news.title } className="image child" />
                       </div>
                     </a>
-                    <a href={ news.url }>{ news.title }</a><br/>
-                    <small>by { news.author } @ { news.source.name } </small>
-                    <small>
-                      { new Date(news.publishedAt).getDate() }/
-                      { new Date(news.publishedAt).getMonth()+1 }/
-                      { new Date(news.publishedAt).getFullYear() }
-                    </small>
-                    <p>{ news.description }</p>
+                    <a href={ news.url } className="has-text-left"><h4 className="xshort">{ news.title }</h4></a>
+                    <div className="has-text-justified xshort">
+                      <p>{ news.description }</p>
+                      <small className="is-uppercase">{ news.author }</small>
+                      <small> @ { news.source.name } </small>
+                      <small>
+                        { new Date(news.publishedAt).getDate() }/
+                        { new Date(news.publishedAt).getMonth()+1 }/
+                        { new Date(news.publishedAt).getFullYear() }
+                      </small>
+                    </div>
                   </div>
                 </div>
               ))  : <img src={logo} className="App-logo" alt="logo" />

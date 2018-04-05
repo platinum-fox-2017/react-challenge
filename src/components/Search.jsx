@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { getNewsArsRdx, getNewsSearchRdx } from '../redux/index.js'
+import { getNewsArsRdx, getNewsSearchRdx } from '../redux/action.js'
 
 import SearchForm from './SearchForm'
 import HeadlineQueryList from './HeadlineQueryList';
@@ -12,7 +12,7 @@ import logo from '../logo.svg';
 class Search extends React.Component {
   searchNews = (query) => {
     this.props.getNewsSearchRdx(query)
-    this.props.history.push(`${this.props.match.path}/query/${query}`)
+    this.props.history.push(`${this.props.match.path}/query/${query}/1`)
   }
 
   render () {
@@ -22,7 +22,7 @@ class Search extends React.Component {
         {
           this.props.isLoading ? <img src={logo} className="App-logo" alt="logo" /> : <div></div>
         }
-        <Route path={`${this.props.match.path}/query/:query`} render={() => {
+        <Route path={`${this.props.match.path}/query/:query/:page`} render={() => {
             return <HeadlineQueryList />
         }}/>
       </div>
