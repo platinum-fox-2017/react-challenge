@@ -47,9 +47,9 @@ class Feed extends Component {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-    payload: state.payload,
-    loading: state.loading,
-    err: state.err
+    payload: state.photo.payload,
+    loading: state.photo.loading,
+    err: state.photo.err
   }
 }
 const mapDispatchToProps = (dispatch) => bindActionCreators({

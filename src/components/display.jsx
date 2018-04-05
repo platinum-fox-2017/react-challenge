@@ -37,7 +37,8 @@ class Display extends Component {
           <img src={gif} alt="wiggledog" id='onload'/>
           <h1>Please wait while our page is loading</h1>
         </div>
-      )}
+      )
+    }
   }
   componentWillMount () {
     this.props.getDataAction()
@@ -46,9 +47,9 @@ class Display extends Component {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-    payload: state.payload,
-    loading: state.loading,
-    err: state.err
+    payload: state.photo.payload,
+    loading: state.photo.loading,
+    err: state.photo.err
   }
 }
 

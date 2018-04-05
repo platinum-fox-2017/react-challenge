@@ -8,8 +8,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from '../src/redux/reducer'
 
+let reducers = combineReducers({
+  photo: reducer
+})
 
-const store = createStore(reducer,  /* preloadedState, */
+const store = createStore(reducers,  /* preloadedState, */
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(thunk))
 
