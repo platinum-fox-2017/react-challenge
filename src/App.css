@@ -88,3 +88,24 @@ ul.breadcrumb li a:hover {
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
+
+.input-text {
+  border: 2px solid black;
+  border-radius: 4px; 
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-right: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background-color: #e7e7e7; color: black;
+    margin: 8px
+}

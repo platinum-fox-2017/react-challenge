@@ -1,4 +1,6 @@
 export const FETCH_STORIES = 'FETCH_STORIES'
+export const SEARCH_STORY = 'SEARCH_STORY'
+export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 export const FETCH_STORIES_ID = 'FETCH_STORIES_ID'
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const LOADING = 'LOADING'

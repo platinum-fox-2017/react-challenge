@@ -1,4 +1,12 @@
-import { ERROR, FETCH_STORY, FETCH_STORIES, FETCH_COMMENTS, LOADING, LOADING_FINISH } from './actionTypes'
+import { 
+  CLEAR_SEARCH,
+  SEARCH_STORY, 
+  ERROR, 
+  FETCH_STORY, 
+  FETCH_STORIES, 
+  FETCH_COMMENTS, 
+  LOADING, 
+  LOADING_FINISH } from './actionTypes'
 
 const fetchArticles = (articles) => {
   return dispatch => {
@@ -71,6 +79,18 @@ const fetchComments = (story) => {
   }
 }
 
+const searchStory = (query) => {
+  return {
+    type: SEARCH_STORY,
+    query
+  }
+}
+
+const clearSearch = () => {
+  return {
+    type: CLEAR_SEARCH,
+  }
+}
 const setStory = (story) => {
   return {
     type: FETCH_STORY,
@@ -98,5 +118,7 @@ const error  = { type: ERROR }
 
 export {
   fetchArticles,
-  fetchStory
+  fetchStory,
+  searchStory,
+  clearSearch
 }

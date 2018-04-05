@@ -3,10 +3,30 @@ import { Link } from "react-router-dom";
 import ArticleCard from './ArticleCard'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchArticles } from '../redux/actions'
+import { fetchArticles, searchStory, clearSearch } from '../redux/actions'
 import { RingLoader } from 'react-spinners'
 
 class ArticleList extends Component {
+  constructor () {
+    super()
+    this.state = {
+      query: null,
+      isSearch: false
+    }
+  }
+
+  changeInput = (e) => {
+    this.setState({query: e.target.value})
+  }
+
+  submitSearch = () => {
+    this.props.searchStory(this.state.query)
+  }
+
+  clearSearch = () => {
+    this.setState({query: null})
+    this.props.clearSearch()
+  }
 
   componentDidMount() {
     this.props.fetchArticles()
@@ -32,11 +52,13 @@ class ArticleList extends Component {
     }  else {
       return (
         <div>
+          <input type="text" className="input-text" value={this.state.query} onChange={this.changeInput} />
+          <button className="button" onClick={this.submitSearch}>Search </button>
+          <button className="button" onClick={this.clearSearch}>Clear</button>
           <ul className="breadcrumb">
             <li><Link to="/" >Home</Link></li>
           </ul>
-
-          <ArticleCard articles={articles}></ArticleCard>
+          <ArticleCard ></ArticleCard>
         </div>
       )
     }
@@ -45,11 +67,10 @@ class ArticleList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    articles: state.articles,
     loading: state.loading,
     error: state.error
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({fetchArticles}, dispatch) 
+const mapDispatchToProps = dispatch => bindActionCreators({fetchArticles, searchStory, clearSearch}, dispatch) 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleList)
