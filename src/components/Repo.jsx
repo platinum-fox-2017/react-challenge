@@ -15,7 +15,7 @@ export default class componentName extends Component {
   getDetailRepo = () => {
     axios.get(`https://api.github.com/repos/eksant/${this.props.match.params.name}`)
     .then(({data}) => {
-      // console.log(data)
+      console.log(data)
       this.setState({ repo: data })
     })
     .catch(err => {
@@ -32,7 +32,7 @@ export default class componentName extends Component {
       <Card
         style={{ width: "100%" }}
         cover={<img alt="example" height="300px" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
-        actions={[<Link to="/"><Icon type="home" /></Link>, <Icon type="edit" />, <Icon type="delete" />]}
+        actions={[<Link to="/"><Icon type="home" />Home</Link>, <Link to="/repos"><Icon type="back" />Back</Link>]}
       >
         <Meta
           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
