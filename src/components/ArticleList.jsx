@@ -10,7 +10,7 @@ class ArticleList extends Component {
   constructor () {
     super()
     this.state = {
-      query: null,
+      query: '',
       isSearch: false
     }
   }
@@ -24,7 +24,7 @@ class ArticleList extends Component {
   }
 
   clearSearch = () => {
-    this.setState({query: null})
+    this.setState({query: ''})
     this.props.clearSearch()
   }
 
