@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch, Link }  from 'react-router-dom';
-import { createStore } from 'redux';
-import { connect } from 'react-redux'
 import PeopleList from './components/PeopleList'
 import CharacterPage from './components/CharacterPage';
 import ErrPage from './components/ErrPage';
-import Home from './components/Home';
 
 class App extends Component {
   render() {
@@ -20,9 +17,8 @@ class App extends Component {
           </header>
           <Switch>
             <Route exact path="/" component={ PeopleList } />
-            {/* <Route exact path="/character" component={ PeopleList } /> */}
             <Route path="/card/:id" component={ CharacterPage } />
-            {/* <Route component={ ErrPage } /> */}
+            <Route component={ ErrPage } />
           </Switch>
         </div>
       </BrowserRouter>

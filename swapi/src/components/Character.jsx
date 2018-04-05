@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 class Character extends Component {
   render() {
@@ -17,7 +18,7 @@ class Character extends Component {
             <p>HP: { this.props.card.hp }</p>
             <p>Type: { this.props.card.types }</p>
             <p>Rarity: { this.props.card.rarity }</p>
-            {/* <p>Weakness: { this.props.card.weaknesses }</p> */}
+            {/* <p>Weakness: { this.props.card.weaknesses[0].type }</p> */}
             <p>Attacks:</p>
               {/* <ul>
                 {
@@ -31,13 +32,22 @@ class Character extends Component {
           </div>
           <div className="poke"></div>
         </div>
+        <div className="wrapper">
+          <div className="center">
+            <div className="button-wrap">
+              <Link to="/">
+                <button className="rad-button static small light flat">Back to List</button>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  card: state.card
+  card: state.cardReducer.data
 })
 
 export default connect(mapStateToProps, null)(Character);

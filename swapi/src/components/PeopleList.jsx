@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getCardsAct, resetCard } from '../actions/action'
+import { getCardsAct } from '../store/cards/cards.actions'
+import { bindActionCreators } from 'redux'
+
+import ErrPage from './ErrPage'
+import Loading from './Loading'
 
 class PeopleList extends Component {
   componentDidMount() {
-    this.getCards()
-    this.props.resetSingleCard()
-  }
-
-  getCards() {
-    axios.get('https://api.pokemontcg.io/v1/cards')
-      .then((response) => {
-        const data = response.data.cards.splice(0, 30)
-        this.props.getCards(data)
-      }).catch((err) => {
-        console.log(err.response)
-      })
+    this.props.getCardsAct()
   }
 
   render() {
     return (
       <div className="cards-wrapper">
       {
-        this.props.cards.length ?
+        this.props.cards.loading ?
+        <Loading />
+        :
+        this.props.cards.error ?
+        <ErrPage />
+        :
         <div className="cards">
           {
-            this.props.cards.map((card, i) => {
+            this.props.cards.data.map((card, i) => {
               return (
                 <div className="card" key={ i }>
                   <Link to={ `/card/${card.id}` }>
@@ -38,11 +35,6 @@ class PeopleList extends Component {
             })
           }
         </div>
-        :
-        <div>
-          <img src="https://media.giphy.com/media/inuVmrCvPaPC/giphy.gif" alt="snorlax" className="onload"/>
-          <h3>please wait while we process your request</h3>
-        </div>
       }
       </div>
     );
@@ -51,14 +43,11 @@ class PeopleList extends Component {
 }
 
 const mapStateToProps = state => ({
-  cards: state.cards
+  cards: state.cardsReducer
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getCards: (cards) => dispatch(getCardsAct(cards)),
-    resetSingleCard: () => dispatch(resetCard())
-  }
-}
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCardsAct
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(PeopleList);
