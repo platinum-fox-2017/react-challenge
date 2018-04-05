@@ -84,22 +84,6 @@ img {
   position: center;
 }
 
-@media all and (max-width: 700px) {
-  .body {
-    align-items: center;
-    grid-template-columns: auto;
-    margin: 5vw 0;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .box {
-    height: 75vw;
-    width: 75vw;
-    overflow: hidden;
-    object-fit: cover;
-  }
-}
-
 a:link {
   color: black;
   text-decoration: none;
@@ -119,7 +103,8 @@ a:visited {
 }
 
 #img {
-  max-width: 75vw;
+  width: 50vw;
+  /* max-width: 75vw; */
 }
 
 .photo-caption {
@@ -133,6 +118,29 @@ a:visited {
   padding-bottom:15vw;
 }
 
-#onload {
-  background-image: url('/assets/images/Jake_wiggle.gif')
+.onLoad {
+  order: 2;
+}
+
+@media all and (max-width: 700px) {
+  .header {
+    grid-template-columns: auto;
+    padding-bottom: 20px;
+  }
+  .body {
+    align-items: center;
+    grid-template-columns: auto;
+    margin: 5vw 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .box {
+    height: 75vw;
+    width: 75vw;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  #img {
+    max-width: 50vw;
+  }
 }

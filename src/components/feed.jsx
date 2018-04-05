@@ -1,45 +1,59 @@
-import React, { Component } from 'react';
+import { Animated } from 'react-animated-css'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import gif from '../assets/images/Jake_wiggle.gif'
 import getDataAction from '../redux/action'
 
 class Feed extends Component {
   
   render() {
     const feeds = this.props.payload
-    return (
-      <div>
-        <div className="body">
-          { feeds &&
-            feeds.map((feed) => 
-              <div key={feed.caption.id} className='box'>
-              <Link to={`/images/${feed.caption.id}`}>
-                <img src={feed.images.standard_resolution.url} alt="gambar" />
-              </Link>
-              </div>
-            )
-          }
+    if (this.props.loading) {
+      return (
+      <Animated animationIn="fadeIn" animationOut="fadeOut" isVisible={true}>
+        <div className="onLoad" style= {{ order: 2 }}>
+          <img style= {{ }} src={gif} alt="wiggledog" id='onload'/>
+          <h1>Please wait while our page is loading</h1>
         </div>
-      </div>
-    )
+      </Animated>
+      )
+    } else {
+      return (
+      <Animated animationIn="fadeIn" animationOut="fadeOut" isVisible={true}>
+        <div>
+          <div className="body">
+            { 
+              feeds.map((feed) => 
+                <div key={feed.caption.id} className='box'>
+                <Link to={`/images/${feed.caption.id}`}>
+                  <img src={feed.images.standard_resolution.url} alt="gambar" />
+                </Link>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </Animated>
+      )
+    }
   }
   componentDidMount(){
-    this.props.getData()
+    this.props.getDataAction()
   }
 };
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
-    payload: state.payload
+    payload: state.payload,
+    loading: state.loading,
+    err: state.err
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getData: () => {
-      console.log(getDataAction())
-      dispatch(getDataAction())
-    }
-  }
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getDataAction
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed);

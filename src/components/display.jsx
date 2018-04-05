@@ -2,71 +2,58 @@ import React, { Component } from 'react';
 import gif from '../assets/images/Jake_wiggle.gif'
 import { connect } from 'react-redux'
 import getDataAction from '../redux/action'
+import { bindActionCreators } from 'redux'
+import { Animated } from 'react-animated-css'
 
 class Display extends Component {
-  constructor() {
-    super()
-    this.state = {
-      singleImage: [],
-      loading: true
-    }
-  }
-  checkLoad (state) {
-    this.setState(() => ({
-      loading: state
-    }))
-  }
   render () {
-    return (
-      <div className='disp-body'>
-        { this.state.loading ?
-          <div>
-            <img src={gif} alt="wiggledog" id='onload'/>
-            <h1>Please wait while our page is loading</h1>
-          </div>
-          :
-          <a href={ 'https://www.google.com/maps/search/?api=1&query='+  this.state.singleImage[0].location.latitude + ',' + this.state.singleImage[0].location.longitude } >
-            <div className='grid'>
-                <h3> click image to check out the place </h3>
-                <div className="photo">
-                  <img id='img' src={this.state.singleImage[0].images.standard_resolution.url} alt="" className="src"/>
-                </div>
-                <div className="photo-caption">
-                  <h3>{ this.state.singleImage[0].caption.text }</h3>
-                </div>
+    if (this.props.payload.length > 0) {
+      return this.props.payload
+        .filter(photo => photo.caption.id === this.props.match.params.id)
+        .map(photo => {
+          return (
+          <Animated animationIn="fadeIn" animationOut="fadeOut" isVisible={true}>
+            <div className='disp-body'>
+              { 
+                <a href={ `https://www.google.com/maps/search/?api=1&query=${photo.location.latitude},${photo.location.longitude}` } >
+                  <div className='grid'>
+                      <h3> click image to check out the place </h3>
+                      <div className="photo">
+                        <img id='img' src={photo.images.standard_resolution.url} alt="" className="src"/>
+                      </div>
+                      <div className="photo-caption">
+                        <h3>{photo.caption.text }</h3>
+                      </div>
+                  </div>
+                </a>
+              }
             </div>
-          </a>
-        }
-      </div>
-    )
+          </Animated>
+          ) 
+        })
+    } else {
+      return (
+        <div>
+          <img src={gif} alt="wiggledog" id='onload'/>
+          <h1>Please wait while our page is loading</h1>
+        </div>
+      )}
   }
-  componentDidMount () {
-    this.checkLoad(true)
-    let load = getDataAction().payload
-    // this.props.getData()
-    // let load = this.props
-    for (let i = 0; i < load.length; i++) {
-      if (load[i].caption.id === this.props.match.params.id) {
-        this.setState(prevState => ({
-          singleImage: [...prevState.singleImage, load[i]]
-        }))
-        this.checkLoad(false)
-      }
-    }
+  componentWillMount () {
+    this.props.getDataAction()
   }
 };
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
-    payload: state.payload
+    payload: state.payload,
+    loading: state.loading,
+    err: state.err
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getData: () => {
-      dispatch(getDataAction())
-    }
-  }
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getDataAction
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Display)

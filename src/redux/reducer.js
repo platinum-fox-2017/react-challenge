@@ -1,12 +1,34 @@
-function reducer (state={}, action) {
+import { GETPHOTO_SUCCESS, GETPHOTO_LOADING, GETPHOTO_ERROR } from './actionType'
+
+let initialState = {
+  payload: [],
+  loading: false,
+  err: false
+}
+
+function reducer (state = initialState, action) {
   switch (action.type) {
-    case 'GETPHOTO': 
-      console.log(action.payload)  
-      state = { ...state, payload: action.payload }
-      break;
-    default: { console.log('masuk default'); break; }
+    case GETPHOTO_SUCCESS:
+      return {
+        ...state, 
+        payload: action.payload,
+        loading: false 
+      }
+    case GETPHOTO_LOADING:
+      return {
+        ...state,
+        loading: true,
+        err: false 
+      }
+    case GETPHOTO_ERROR:
+      return {
+        ...state,
+        lading: false,
+        err: true
+      }
+    default: 
+      return state
   }
-  return state
 }
  
 export default reducer
