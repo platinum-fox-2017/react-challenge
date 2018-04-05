@@ -1,0 +1,111 @@
+.App {
+}
+
+.container {
+  margin: 30px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.table {
+margin: 20px 0;
+}
+.table-header {
+display: flex;
+line-height: 24px;
+font-size: 16px;
+padding: 0 10px; justify-content: space-between;
+}
+.table-empty { margin: 200px; text-align: center; font-size: 16px;
+}
+
+.table-row {
+display: flex; line-height: 24px; white-space: nowrap; margin: 10px 0;
+padding: 10px; background: #ffffff; border: 1px solid #e3e3e3;
+}
+.table-header > span { overflow: hidden; text-overflow: ellipsis; padding: 0 5px;
+}
+.table-row > span { overflow: hidden; text-overflow: ellipsis; padding: 0 5px;
+}
+/* Style the list */
+ul.breadcrumb {
+   padding: 10px 16px;
+   list-style: none;
+   background-color: #eee;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+   display: inline;
+   font-size: 18px;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li+li:before {
+   padding: 8px;
+   color: black;
+   content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+   color: #0275d8;
+   text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+   color: #01447e;
+   text-decoration: underline;
+} 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.input-text {
+  border: 2px solid black;
+  border-radius: 4px; 
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-right: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background-color: #e7e7e7; color: black;
+    margin: 8px
+}
