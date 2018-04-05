@@ -32,7 +32,7 @@ class ArticleList extends Component {
     this.props.fetchArticles()
   }
   render() {
-    const { articles, loading, error } = this.props
+    const {loading, error } = this.props
     if (loading) {
       return (
         <div>
