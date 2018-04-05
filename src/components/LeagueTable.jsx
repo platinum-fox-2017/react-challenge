@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getLeagueTable } from '../redux/action';
+import { getLeagueTable } from '../redux/leaguetable/leaguetable.action';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 class LeagueTable extends Component {
   componentDidMount () {
     let idLeague = this.props.match.params.id
-    this.props.getLegTable(idLeague)
+    this.props.getLeagueTable(idLeague)
   }
 
   render() {
@@ -60,14 +61,14 @@ class LeagueTable extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    leagueTable: state.leagueTable,
-    loading: state.loading_data,
-    error: state.error_data
+    leagueTable: state.leagueTableReducer.leagueTable,
+    loading: state.leagueTableReducer.loading_data,
+    error: state.leagueTableReducer.error_data
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getLegTable: (id) => dispatch(getLeagueTable(id))
-})
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getLeagueTable
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeagueTable);

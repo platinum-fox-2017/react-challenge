@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import {
   getCompetitionList
-} from '../redux/action'
+} from '../redux/competitionlist/competitionlist.action'
 
 class CompetitionList extends Component {
   componentDidMount () {
-    this.props.getCompList()
+    this.props.getCompetitionList()
   }
 
   render() {
@@ -54,15 +55,15 @@ class CompetitionList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    message: state.message,
-    competitionList: state.competitionList,
-    loading: state.loading_data,
-    error: state.error_data
+    message: state.competitionListReducer.message,
+    competitionList: state.competitionListReducer.competitionList,
+    loading: state.competitionListReducer.loading_data,
+    error: state.competitionListReducer.error_data
   }
 }
 
-const mapDispatchProps = (dispatch) => ({
-  getCompList: () => dispatch(getCompetitionList()),
-})
+const mapDispatchProps = (dispatch) => bindActionCreators({
+  getCompetitionList,
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps)(CompetitionList)

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { getDetailClub } from '../redux/action';
+import { getDetailClub } from '../redux/clubdetail/clubdetail.action';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 class ClubDetail extends Component {
 
   componentDidMount () {
     let teamsId = this.props.match.params.idteam
-    this.props.getClubDetail(teamsId)
+    this.props.getDetailClub(teamsId)
   }
 
   render() {
@@ -34,14 +35,14 @@ class ClubDetail extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    team: state.detailClub,
-    loading: state.loading_data,
-    error: state.error_data
+    team: state.detailClubReducer.detailClub,
+    loading: state.detailClubReducer.loading_data,
+    error: state.detailClubReducer.error_data
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getClubDetail: (id) => dispatch(getDetailClub(id))
-})
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getDetailClub
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClubDetail);
