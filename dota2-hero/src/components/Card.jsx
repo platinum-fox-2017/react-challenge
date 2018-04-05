@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default class Card extends Component {
   render() {
     return (
-      <Link className="card" to={ '/' + this.props.id }>
+      <Link className={"card card-" + this.props.attr} to={ '/' + this.props.id }>
         <nav className="card-header">
           { this.props.name }
         </nav>

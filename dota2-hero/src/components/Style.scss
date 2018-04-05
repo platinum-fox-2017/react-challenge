@@ -7,6 +7,13 @@ $content-color: #322f20;
 $board-color: #6a5837;
 $card-font: 'BenchNine', sans-serif;
 $font-color: #fff;
+$agi-color: #345839;
+$str-color: #8b2326;
+$int-color: #2e3376;
+
+body {
+  color: $font-color;
+}
 
 .navbar {
   height: 64px;
@@ -61,14 +68,21 @@ $font-color: #fff;
   text-decoration: none;
 }
 
-.card-header {
-  background-color: $navbar-color;
-  font-family: $card-font;
-  color: $font-color;
+.card-agi {
+  background-color: $agi-color;
 }
 
-.card-content {
-  background-color: $navbar-color;
+.card-str {
+  background-color: $str-color;
+}
+
+.card-int {
+  background-color: $int-color;
+}
+
+.card-header {
+  font-family: $card-font;
+  color: $font-color;
 }
 
 .loading {

@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans:300i");
 @import url("https://fonts.googleapis.com/css?family=BenchNine:400");
+body {
+  color: #fff; }
+
 .navbar {
   height: 64px;
   background-color: #23231a;
@@ -44,13 +47,21 @@
   margin: 1rem 0.25em;
   text-decoration: none; }
 
+.card-agi {
+  background-color: #345839; }
+
+.card-str {
+  background-color: #8b2326; }
+
+.card-int {
+  background-color: #2e3376; }
+
 .card-header {
-  background-color: #23231a;
   font-family: "BenchNine", sans-serif;
   color: #fff; }
 
-.card-content {
-  background-color: #23231a; }
+.loading {
+  margin: 0 auto; }
 
 @media all and (max-width: 700px) {
   .hero {
