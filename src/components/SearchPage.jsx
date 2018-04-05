@@ -1,50 +1,49 @@
 import React, { Component } from 'react';
+import SearchForm from './SearchForm'
 import axios from 'axios';
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchAllArticles} from '../actions/index'
 
-class newsList extends Component {
-  componentDidMount() {
+class SearchPage extends Component {
+  searchNews(query) {
     axios({
       method:'get',
-      url:'https://newsapi.org/v2/top-headlines?country=us&apiKey=c007386430cc42208dfe32ba97c739eb'
+      url:`https://newsapi.org/v2/everything?q=${query}&apiKey=c007386430cc42208dfe32ba97c739eb`,
     }).then(response=>{
-        this.props.loadArticles(response.data.articles)
+      console.log(response)
+      // this.props.loadArticles(response.data.articles)
     }).catch(err=>console.log(err))
   }
-
   render() {
     const {articles} = this.props
     return (
-      <div className="container content">
+      <div>
+        <SearchForm searchNews={ this.searchNews }/>
+        <div className="container content">
         <div className="row">
          {
-          (articles.length> 0 ) ?
            articles.map(function (article, index){
              return <div className="col col-md-3 newsItem text-left" key={index}>
                       <img key={article.title} alt={article.title} src={article.urlToImage} height="140" width="260"/>
                       <Link to={`/article/${index}`}> { article.title }</Link>
                     </div>
-           }) : <h1>Loading...</h1>
+           })
           }
         </div>
       </div>
+      </div>
     )
   }
-}
-
-const mapStateToProps = state => {
-  return{
-    articles: state.articles
-  }
-}
-
+};
+const mapStateToProps = state => ({
+  articles: state.articles
+})
 
 const mapDispatchToProps = dispatch => {
-  return{
-    loadArticles: (payload) => dispatch(fetchAllArticles(payload))
-  }
+return{
+  loadArticles: (payload) => dispatch(fetchAllArticles(payload))
+}
 }
 
-export default  connect (mapStateToProps, mapDispatchToProps)(newsList)
+export default  connect (mapStateToProps, mapDispatchToProps)(SearchPage)

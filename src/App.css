@@ -32,6 +32,9 @@
 .newsItem {
   margin-bottom: 40px;
 }
+.headline {
+  font-size: 25px;
+}
 .date {
   color: grey;
   font-size: 14px;
@@ -39,4 +42,14 @@
 .author {
   color: #222;
   font-size: 14px;
+}
+ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+li { 
+  padding-left: 16px; 
+  display: inline-block;
 }
