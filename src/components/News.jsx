@@ -1,47 +1,44 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { getNews } from '../redux/actions';
+import { getNews, getNewsById } from '../store/news/news.actions';
+import Articles from './Articles';
+import NewsButtonSwitch from './NewsButtonSwitch';
+import { bindActionCreators } from 'redux';
 
 class News extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         articles: []
-    //     }
-    // }
 
     componentDidMount() {
-        axios.get('https://newsapi.org/v2/top-headlines?sources=cnn&apiKey=2e9aaee5201948d48f187726b0896988')
-            .then(response => {
-                this.props.getNews(response.data.articles)
-            }).catch(err => {
-                console.log(err)
-            })
+        let id = this.props.match.params.id;
+        if (id) {
+            this.props.getNewsById(id);
+        } else {
+            this.props.getNews();
+        }
     }
+
     render() {
-        if(this.props.news.length === 0) {
+        if (this.props.news.loading) {
             return (
                 <div className="news-container">
+                    <NewsButtonSwitch id={this.props.match.params.id} />
                     <h3>Loading...</h3>
+                </div>
+            )
+        }
+        if (this.props.news.error) {
+            return (
+                <div className="news-container">
+                    <NewsButtonSwitch id={this.props.match.params.id}/>
+                    <h3>Sorry, something error..</h3>
                 </div>
             )
         }
         return (
             <div className="news-container">
+                <NewsButtonSwitch id={this.props.match.params.id} />
                 {
-                    this.props.news.map(article =>
-                        <div className="media" key={article.url}>
-                            <div className="media-left media-top">
-                                <a href={article.url} target="_blank">
-                                    <img className="media-object" src={article.urlToImage} alt={article.urlToImage} min-width="200" height="100" />
-                                </a>
-                            </div>
-                            <div className="media-body">
-                                <h4 className="media-heading margin-top-10 justify"><strong>{article.title}</strong></h4>
-                                <p className="margin-top-10 justify">{article.description}</p>
-                            </div>
-                        </div>
+                    this.props.news.data.map(article =>
+                        <Articles article={article} key={article.url} />
                     )
                 }
             </div>
@@ -51,14 +48,13 @@ class News extends Component {
 
 const mapStateToProps = state => {
     return {
-        news: state.newsReducers.news
+        news: state.news
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getNews: (payload) => dispatch(getNews(payload))
-    }
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    getNews, 
+    getNewsById
+  }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);
