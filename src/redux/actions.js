@@ -66,6 +66,7 @@ const fetchStory = (id) => {
 
 const fetchComments = (story) => {
   return dispatch => {
+    dispatch(clearComment())
     story.kids.forEach(id => {
       dispatch(loading)
       fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
