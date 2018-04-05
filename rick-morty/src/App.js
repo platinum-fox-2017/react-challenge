@@ -48,9 +48,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  characters: state.characters,
-  isLoading: state.isLoading,
-  pageIndex: state.pageIndex
+  characters: state.charactersReducer.characters,
+  isLoading: state.charactersReducer.isLoading,
+  pageIndex: state.charactersReducer.pageIndex
 });
 
 const mapDispatchToProps = (dispatch) => ({

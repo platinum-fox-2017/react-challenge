@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios'
 
 import { loading, fetchCharaters, goPage } from '../redux/actions';
+// import NavBar from './NavBar.jsx';
 
 class Header extends Component {
   goTo = (toPage) => {
@@ -44,15 +45,16 @@ class Header extends Component {
           <button className="go-btn" onClick={ () => this.goTo('prev') }>PREV</button>
           <button className="go-btn" onClick={ () => this.goTo('next') }>NEXT</button>        
         </div>
+        {/* <NavBar/> */}
       </header>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  characters: state.characters,
-  isLoading: state.isLoading,
-  pageIndex: state.pageIndex
+  characters: state.charactersReducer.characters,
+  isLoading: state.charactersReducer.isLoading,
+  pageIndex: state.charactersReducer.pageIndex
 });
 
 const mapDispatchToProps = (dispatch) => ({

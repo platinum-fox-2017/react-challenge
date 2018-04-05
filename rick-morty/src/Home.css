@@ -6,6 +6,7 @@
 .box {
   flex: 1;
   width: 310px;
+  max-width: 310px;  
   padding: 5px;
   background: #212121;
   margin: 10px;

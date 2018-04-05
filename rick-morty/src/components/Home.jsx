@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import CharacterBox from './CharcterBox.jsx'
+import React, { Component } from 'react';
+import CharacterBox from './CharcterBox.jsx';
 
 import '../Home.css';
 

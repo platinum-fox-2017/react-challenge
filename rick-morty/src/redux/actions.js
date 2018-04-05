@@ -1,6 +1,6 @@
 const fetchCharaters = (payload) => {
   return {
-    type: 'FETCHCHARACTERS',
+    type: 'FETCH_CHARACTERS',
     payload: payload
   }
 }
@@ -11,7 +11,7 @@ const loading = () => {
 
 const searchCharacter = (payload) => {
   return {
-    type: 'SEARCHCHARACTER',
+    type: 'SEARCH_CHARACTER',
     payload: payload
   }
 }
