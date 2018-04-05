@@ -51,9 +51,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchArticles
-  },
-  dispatch
-) 
+const mapDispatchToProps = dispatch => bindActionCreators({fetchArticles}, dispatch) 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleList)

@@ -4,4 +4,4 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const LOADING = 'LOADING'
 export const LOADING_FINISH = 'LOADING_FINISH'
 export const ERROR = 'ERROR'
-
+export const FETCH_STORY = 'FETCH_STORY'

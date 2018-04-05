@@ -3,8 +3,20 @@ import { connect } from 'react-redux'
 import { RingLoader } from 'react-spinners'
 
 const CommentList = (props) => {
-  const {comments} = props
-  if (comments.length) {
+  const {comments, loading, error} = props
+  if (loading) {
+    return (
+      <div className="centered">
+        <RingLoader />
+      </div>
+    )
+  } else if(error) {
+    return (
+      <div className="centered">
+        <h1>Opps, Something Went Wrong </h1>
+      </div>
+    )
+  } else if (comments.length) {
     return comments.map(comment => {
       return (
         <div className="table">
@@ -18,13 +30,15 @@ const CommentList = (props) => {
       )
     })
   } else {
-    return (<div className="centered"> <RingLoader /></div>)
+    return (<div className="centered"> There is No Comment</div>)
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    comments: state.comments
+    comments: state.comments,
+    loading: state.loading,
+    error: state.error
   }
 }
 export default connect(mapStateToProps, null)(CommentList)

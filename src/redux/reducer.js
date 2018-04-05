@@ -1,7 +1,8 @@
-import { ERROR, FETCH_STORIES, FETCH_COMMENTS, LOADING, LOADING_FINISH } from './actionTypes'
+import { ERROR, FETCH_STORY, FETCH_STORIES, FETCH_COMMENTS, LOADING, LOADING_FINISH } from './actionTypes'
 
 const initialState = {
   articles: [],
+  article: {},
   comments: [],
   loading: false,
   error: false
@@ -12,6 +13,10 @@ const reducer = (state = initialState, action) => {
       ...state, 
       articles: [...state.articles, action.articles]
     }
+  }
+
+  if(action.type === FETCH_STORY) {
+    return {...state, article: action.article }
   }
 
   if(action.type === ERROR) {

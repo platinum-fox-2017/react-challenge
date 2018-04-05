@@ -1,70 +1,45 @@
 import React, {Component} from 'react';
 import CommentList from './CommentList'
+import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchComments } from '../redux/actions'
+import { fetchStory } from '../redux/actions'
+import { RingLoader } from 'react-spinners'
 
 class ArticleDetail extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      story: {},
-      error: null
-    }
-  }
-
-  fetchStory = () => {
-    const app = this
-    const {id} = this.props.match.params
-    fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
-         .then(response => response.json())
-         .then(result => {
-           app.setState({story: result})
-           app.fetchComments()
-         })
-         .catch(e => this.setState({error: e}))
-  }
-
-  fetchComments = () => {
-    const app = this
-    const {story} = this.state
-    story.kids.forEach(id => {
-      fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
-           .then(response => response.json())
-           .then(result => {
-             app.props.fetchComments(result)
-           })
-           .catch(e => this.setState({error: e}))
-    })
-  }
-
   componentDidMount() {
-    this.fetchStory()
+    const {id} = this.props.match.params
+    this.props.fetchStory(id)
   }
   render() {
-    const { story, error } = this.state
-    if (error) {
+    const { article, error, loading } = this.props
+    
+    if (loading) {
       return (
-        <div className="table">
-            <div className="table-row">
-              <span style={{ width: '100%'}}>No Story Found</span>
-            </div>
+        <div className="centered">
+          <RingLoader />
+        </div>
+      )
+    } else if (error) {
+      return (
+        <div className="centered">
+          <h1>Opps, Something Went Wrong </h1>
         </div>
       )
     } else {
       return (
         <div>
-          <ul class="breadcrumb">
+          <ul className="breadcrumb">
             <li><Link to="/" >Home</Link></li>
             <li>Detail Story</li>
           </ul>
           <div className="table">
-              <div className="table-row" key={ story.id}>
+              <div className="table-row" key={ article.id}>
                 <span style={{ width: '40%'}}>
-                  <h3>{ story.title}</h3>
-                  <h4>{ story.by}</h4>
-                  <a href={story.url} target="_blank">Visit Story</a>
+                  <h3>{ article.title}</h3>
+                  <h4>{ article.by}</h4>
+                  <a href={article.url} target="_blank">Visit Story</a>
                 </span>
               </div>
           </div>
@@ -77,10 +52,13 @@ class ArticleDetail extends Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchStory }, dispatch)
+const mapStateToProps = (state) => {
   return {
-    fetchComments: (comments) => dispatch(fetchComments(comments))
+    article: state.article,
+    loading: state.loading,
+    error: state.error
   }
 }
 
-export default connect(null, mapDispatchToProps)(ArticleDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetail)
