@@ -1,4 +1,4 @@
-import { FETCH_YT_VIDEOS } from './ytActionTypes'
+import { FETCH_YT_VIDEOS_SUCCESS, FETCH_YT_VIDEOS_LOADING, FETCH_YT_VIDEOS_ERROR } from './ytActionTypes'
 import axios from "axios";
 
 const API = 'AIzaSyAqeflTMkQmxDmlCAUlEILEBEmGeoz3Mco'
@@ -9,18 +9,27 @@ const result = 4
 
 var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${API}&channelId=${channelID}&part=snippet,id&order=date&maxResults=${result}`
 
+const fetchLoading = (payload) => ({
+  type: FETCH_YT_VIDEOS_LOADING
+})
+
+const fetchError = () => ({
+  type: FETCH_YT_VIDEOS_ERROR
+})
+
 export const fetchVideos = () => dispatch => {
   // console.log('@ytActions/ fetchVideos')
+  dispatch(fetchLoading())
   axios.get(finalURL)
   .then(res => {
     const resultYT = res.data.items
     dispatch({
-      type: FETCH_YT_VIDEOS,
+      type: FETCH_YT_VIDEOS_SUCCESS,
       payload: resultYT
     })
   })
   .catch(error => {
-    console.error(error)
+    dispatch(fetchError())
   })
 }
 

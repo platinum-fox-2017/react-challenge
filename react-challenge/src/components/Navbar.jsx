@@ -15,8 +15,7 @@ export default class Navbar extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link to="/">
-              <a className="navbar-brand">MY TUBE</a>
+            <Link to="/" className="navbar-brand">MY TUBE>
             </Link>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
