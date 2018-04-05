@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { RingLoader } from 'react-spinners'
+import CommentItem from './CommentItem'
 
 const CommentList = (props) => {
   const {comments, loading, error} = props
@@ -17,16 +18,9 @@ const CommentList = (props) => {
       </div>
     )
   } else if (comments.length) {
-    return comments.map(comment => {
+    return comments.map((comment, i) => {
       return (
-        <div className="table" key={ comment.id}>
-            <div className="table-row" >
-              <span style={{ width: '50%'}}>
-                {  comment.text}
-              </span>
-              <span style={{ width: '20%'}}>{ comment.by}</span>
-            </div>
-        </div>
+        <CommentItem comment={comment} key={i} />
       )
     })
   } else {

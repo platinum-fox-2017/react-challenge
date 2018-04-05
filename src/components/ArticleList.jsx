@@ -5,28 +5,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchArticles, searchStory, clearSearch } from '../redux/actions'
 import { RingLoader } from 'react-spinners'
+import Error from './Error'
+import SearchForm from './SearchForm'
+import BreadCrumbHome from './BreadCrumbHome'
 
 class ArticleList extends Component {
-  constructor () {
-    super()
-    this.state = {
-      query: '',
-      isSearch: false
-    }
-  }
-
-  changeInput = (e) => {
-    this.setState({query: e.target.value})
-  }
-
-  submitSearch = () => {
-    this.props.searchStory(this.state.query)
-  }
-
-  clearSearch = () => {
-    this.setState({query: ''})
-    this.props.clearSearch()
-  }
 
   componentDidMount() {
     this.props.fetchArticles()
@@ -42,22 +25,12 @@ class ArticleList extends Component {
         </div>
       )
     }  else if (error) {
-      return (
-        <div>
-          <div className="centered">
-            <h1>Opps, Something Went Wrong</h1>
-          </div>
-        </div>
-      )
+      return <Error />
     }  else {
       return (
         <div>
-          <input type="text" className="input-text" value={this.state.query} onChange={this.changeInput} />
-          <button className="button" onClick={this.submitSearch}>Search </button>
-          <button className="button" onClick={this.clearSearch}>Clear</button>
-          <ul className="breadcrumb">
-            <li><Link to="/" >Home</Link></li>
-          </ul>
+          <SearchForm />
+          <BreadCrumbHome />
           <ArticleCard ></ArticleCard>
         </div>
       )
@@ -72,5 +45,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({fetchArticles, searchStory, clearSearch}, dispatch) 
+const mapDispatchToProps = dispatch => bindActionCreators({fetchArticles}, dispatch) 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleList)

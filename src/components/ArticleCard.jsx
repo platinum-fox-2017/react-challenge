@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
+import ArticleItem from './ArticleItem'
 
 const ArticleCard = (props) => {
   const {articles, searchArticles, isSearch} = props
@@ -11,32 +11,16 @@ const ArticleCard = (props) => {
       </div>
     )
   } else if (isSearch && searchArticles.length) {
-    return searchArticles.map(article => {
+    return searchArticles.map((article, i) => {
       return (
-        <div className="table" key={ article.id }>
-            <div className="table-row" >
-              <span style={ { width: '40%'} }>
-                <Link to={'/story/'+ article.id} > { article.title} </Link>
-              </span>
-              <span style={{ width: '20%'}}>{ article.by}</span>
-              <span style={{ width: '20%'}}>Score: { article.score}</span>
-            </div>
-        </div>
+        <ArticleItem article={article} key={i} />
       )
     })
   } else {
 
-    return articles.map(article => {
+    return articles.map((article, i) => {
       return (
-        <div className="table" key={ article.id }>
-            <div className="table-row" >
-              <span style={ { width: '40%'} }>
-                <Link to={'/story/'+ article.id} > { article.title} </Link>
-              </span>
-              <span style={{ width: '20%'}}>{ article.by}</span>
-              <span style={{ width: '20%'}}>Score: { article.score}</span>
-            </div>
-        </div>
+        <ArticleItem article={article} key={i} />
       )
     })
   }
