@@ -1,8 +1,9 @@
 import React, { Component } from 'react' 
 import logo from '../logo-white.svg'
 import './HeaderNav.css'
+import { connect } from 'react-redux'
 
-export default class HeaderNav extends Component { 
+class HeaderNav extends Component { 
 
   checkFunction = () => {
     if (this.props.setHeader) {
@@ -12,6 +13,7 @@ export default class HeaderNav extends Component {
       return 'header-logo'
     }
   }
+
 
   render() { 
     return (
@@ -34,3 +36,10 @@ export default class HeaderNav extends Component {
     ) 
   } 
 }
+
+const mapStateToProps = state => ({
+  loadingList: state.list.loading,
+  loadingDetail: state.detail.loading
+})
+
+export default connect(mapStateToProps, null) (HeaderNav)

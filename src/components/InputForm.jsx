@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './InputForm.css'
-
+ 
 class InputForm extends Component {
   constructor(props) {
     super(props)
@@ -287,4 +287,4 @@ class InputForm extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputForm)
+export default InputForm

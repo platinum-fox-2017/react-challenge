@@ -1,44 +1,29 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import HeaderNav from './HeaderNav'
 import logo from '../logo.svg'
 
+import { fetchUniversityDetail, updatePrevLocation } from '../store/universties/universities.actions'
+
 import './DetailPage.css'
 
-export default class DetailPage extends Component {
+class DetailPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: props.match.params.university.split('-').join(' '),
-      country: '',
-      website: '',
-      isLoading: false,
+      name: props.match.params.university.split('%20').join(' '),
     }    
   }
 
   fetchData = (name) => {
-    this.setState({isLoading: true})
-    axios({
-      method: 'get',
-      url: `/search?name=${name}`
-    })
-      .then(response => {
-        this.setState({isLoading: false})
-        console.log(response.data[0])
-        this.setState({
-          country: response.data[0].country,
-          website: response.data[0].web_pages[0]
-        })
-      })
-      .catch(err => {
-        this.setState({isLoading: false})
-        console.log(`err: ${err}`)
-      })
+    this.props.fetchUniversityDetail(name)
   }
 
   componentDidMount () {
-    console.log(this.state.name)
     this.fetchData(this.state.name)
+    this.props.updatePrevLocation(this.props.location.pathname)
   }
 
 
@@ -50,23 +35,26 @@ export default class DetailPage extends Component {
     }
   }
 
+
   render() {
     return (
       <div>
         <HeaderNav setHeader={this.setHeader} />
         <div className='container'>
-          <h1>{this.state.name}</h1>
-          {this.state.isLoading ? 
+          {this.props.loading ? 
           <div>
             <img className='loading-logo' src={logo} alt=""/> 
             <h2 className='loading'>Loading<span>.</span><span>.</span><span>.</span></h2>
           </div>
         : null}
-          {!this.state.isLoading ? 
-            <div className='wrapper'>
-              <h5>Name: {this.state.name}</h5>
-              <h5>Country: {this.state.country}</h5>
-              <h5>Website: <a href={this.state.website}> {this.state.website} </a></h5> 
+          {!this.props.loading ? 
+            <div>
+              <h1>{this.props.university.name}</h1>
+              <div className='wrapper'>
+                <h5>Name: {this.props.university.name}</h5>
+                <h5>Country: {this.props.university.country}</h5>
+                <h5>Website: <a href={this.props.university.website}> {this.props.university.website} </a></h5> 
+              </div>
             </div>
           : null}
           <div><button onClick={this.props.history.goBack}>Back</button></div>
@@ -75,3 +63,15 @@ export default class DetailPage extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  university: state.detail.university,
+  loading: state.detail.loading
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchUniversityDetail,
+  updatePrevLocation
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps) (DetailPage)

@@ -16,6 +16,10 @@
   to { transform: rotate(360deg); }
 }
 
+#page {
+  margin: 20px 0 40px 0;
+}
+
 .loading {
   color: #4CC7EA;
 }
@@ -24,6 +28,11 @@
   border-radius: 10px;
   padding: 30px 10px;
   margin: 20px 0px;
+  transition: transform .2s;
+}
+
+.card-result:hover {
+  transform: scale(1.05);
 }
 
 .card-result:nth-child(even) {
