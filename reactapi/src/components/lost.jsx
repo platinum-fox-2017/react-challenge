@@ -5,7 +5,7 @@ class Lost extends Component {
   render() { 
     return (
         <div>
-          <h3>Hayooo mau ngapain ?? jangan nakal ah</h3>
+          <h3>Hayooo mau ngapain ??</h3>
           <br/>
           <Link to='/'>
             <button class="btn btn-success">Back Home</button>

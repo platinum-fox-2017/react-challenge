@@ -11,12 +11,24 @@ class Home extends Component {
       <div>
         <h1>Hellow World !</h1>
         <p>Welcome to Hacker News </p>
-        <Link to="/news">
-          <button class="btn btn-success">read news</button> 
-        </Link>
+          <Link to="/news">
+            <button style= {styles.button} class="btn btn-success">read news</button> 
+          </Link>
+          <Link to="/count">
+            <button style= {styles.button} class="btn btn-success">Count Number</button>
+          </Link>
+          <Link to="/newsRedux">
+            <button class="btn btn-success">News With Redux</button>
+          </Link>
       </div>
     )
   }
 }
- 
+
+const styles = {
+  button :{
+    marginRight: '10px'
+  }
+}
+
 export default Home ;

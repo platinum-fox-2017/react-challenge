@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 
 class hello extends React.Component {
   constructor() {
@@ -29,16 +30,18 @@ class hello extends React.Component {
           </Link> 
         </div>
         <div class= "row">
-        {this.state.news.map(data => 
+        {this.state.news.length > 0 ? this.state.news.map(data =>
           <div class="col-md-3" key={data.url}>
             <div style={styles.thumbnail} class="thumbnail">
-              <img style={styles.img} class="rounded mx-auto d-block" width="250" height="200" src={data.urlToImage} alt=""/>
+              <img style={styles.img} class="rounded mx-auto d-block" width="250" height="200" src={data.urlToImage} alt="img fail to load"/>
               <Link to={`/detailnews/${data.title}/${data.description}/${data.urlToImage}`}>
               <h5>{data.title}</h5>
               </Link>
             </div>
           </div>
-        )}
+          ):<div  style={styles.gif} className='sweet-loading'>
+              <RingLoader color={'#123abc'} size={100} loading={this.state.loading}/>
+            </div> }
         </div>
       </div>
     )
@@ -60,6 +63,10 @@ const styles = {
   },
   img: {
     marginBottom: '15px'
+  },
+  gif: {
+    textAlign: 'center',
+    width: '100%'
   }
 }
  

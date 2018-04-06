@@ -5,7 +5,10 @@ import News from './components/news';
 import Home from './components/home'
 import Detail from './components/newsdetail'
 import Lost from './components/lost'
+import Count from './components/letscount'
 import './App.css';
+import newsRedux from './components/newsRedux';
+
 
 class App extends Component {
   render() {
@@ -19,7 +22,10 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/news" component={News}/>
+            <Route path="/count" component={Count}/>
             <Route path="/detailnews/:title/:description/:image" component={Detail}/>
+            <Route path="/newsRedux" component={newsRedux}/>
+            <Route path="/newsRedux/:category" component={newsRedux}/>
             <Route component={Lost}/>
           </Switch>
         </div>
