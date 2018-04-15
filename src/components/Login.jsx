@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class componentName extends Component {
+export default class Login extends Component {
   render() {
     return (
       <div className="docs-card-example" style={{ width: "65%", paddingTop: "200px", paddingLeft: "30%" }}>

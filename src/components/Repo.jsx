@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Card, Icon, Avatar } from 'antd';
 const { Meta } = Card;
 
-export default class componentName extends Component {
+export default class Repo extends Component {
   constructor() {
     super()
     this.state = {

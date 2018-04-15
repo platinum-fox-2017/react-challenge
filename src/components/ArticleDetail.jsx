@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
 import { List, Avatar } from 'antd';
-import { loadArticles } from '../store/articles/articles.actions';
+import { loadArticleById } from '../store/articles/articles.actions';
 
-class ArticleList extends Component {
+class ArticleDetail extends Component {
   componentDidMount() {
-    this.props.loadArticles()
+    // console.log('params id: ', this.props.match.params.id)
+    this.props.loadArticleById(this.props.match.params.id)
   }
 
   render() {
@@ -27,22 +27,18 @@ class ArticleList extends Component {
     } else if (this.props.articles.error) {
       return <h1>Oops, something error...!!</h1>
     }else {
-      const articles = this.props.articles.datas;
+      const article = this.props.articles.data;
       return (
         <div className="pt-card .modifier">
-          {
-            articles.map(article => (
-              <List.Item key={article._id}>
-                <List.Item.Meta
-                  avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                  title={<Link to={`/article/${article._id}`}>{article.title}</Link>}
-                  description={article.content}
-                  style={{ width: "180%" }}
-                />
-                <div>{article.createdAt.slice(0, 10)} <br/><small>{article.author.username}</small></div>
-              </List.Item>
-            ))
-          }
+          <List.Item key={article._id}>
+            <List.Item.Meta
+              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+              title={article.title}
+              description={article.content}
+              style={{ width: "180%" }}
+            />
+            <div>{article.createdAt}</div>
+          </List.Item>
         </div>
       )
     }
@@ -54,7 +50,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  loadArticles,
+  loadArticleById,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetail);

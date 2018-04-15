@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import ArticleList from './components/ArticleList';
+import ArticleDetail from './components/ArticleDetail';
 import Repos from './components/Repos';
 import Repo from './components/Repo';
 import Login from './components/Login';
@@ -30,6 +31,7 @@ class App extends Component {
                 </div>
               </nav>
               <Route exact path="/" component={ ArticleList } />
+              <Route exact path="/article/:id" component={ ArticleDetail } />
               <Route exact path="/login" component={ Login } />
               <Route exact path="/repos" component={ Repos } />
               <Route exact path="/repo/:name" component={ Repo } />
