@@ -40,4 +40,10 @@ describe('HouseDetail component', ()=>{
     const p = wrapper.find('.offset-md-3')
     expect(p).toHaveLength(0)
   })
+
+  it('Loading is true', () => {
+    const wrapper = shallow(<HouseDetail store={ store }/>)
+    wrapper.setProps({ loading: true });
+    expect(wrapper.props().loading).toBe(true);
+  })
 })
