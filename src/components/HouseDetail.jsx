@@ -10,8 +10,6 @@ class HouseDetail extends Component {
     this.props.loadHouse(houseId)
   }
 
-
-
   render() {
     if (this.props.house.loading) {
       return (
