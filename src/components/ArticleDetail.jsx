@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { List, Avatar } from 'antd';
 import { loadArticleById } from '../store/articles/articles.actions';
 
-class ArticleDetail extends Component {
+export class ArticleDetail extends Component {
   componentDidMount() {
     // console.log('params id: ', this.props.match.params.id)
     this.props.loadArticleById(this.props.match.params.id)

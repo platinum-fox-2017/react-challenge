@@ -1,23 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { configure, shallow, mount } from 'enzyme';
+import Enzyme, { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
+import { List, Avatar } from 'antd';
 
 import store from './store';
+import articlesReducer from './store/articles/articles.reducers'
 
 import ArticleList from './components/ArticleList';
-import ArticleDetail from './components/ArticleDetail';
+import {ArticleDetail} from './components/ArticleDetail';
 import Repos from './components/Repos';
 import Repo from './components/Repo';
 import Login from './components/Login';
 import logo from './logo.svg';
 import './App.css';
 
-configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() });
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -76,6 +78,18 @@ describe(('<App /> testing') , () => {
       </Provider>
     ]))
   });
+
+  // it('should render link', function() {
+  //   const app = mount(
+  //     <Provider store={store}>
+  //       <App />
+  //     </Provider>
+  //   )
+  //   const link = app.contains(
+  //     <Link to="/">Blog</Link>
+  //   )
+  //   expect(link).toBe(true)
+  // })
 });
 
 describe('login component testing', () => {
@@ -92,10 +106,49 @@ describe('repos component testing', () => {
   });
 });
 
+describe('article detail component testing', () => {
+  it('should have components', () => {
+    let match = {
+      params: {
+        id: 'eksant'
+      }
+    }
 
-// describe('repo component testing', () => {
-//   it('should have components', () => {
-//     const wrapper = shallow(<Repo />)
-//     expect(wrapper.exists)
-//   });
-// });
+    let articles = {
+      loading: false,
+      data: {
+        _id: 3456789,
+        title: 'Testing article',
+        content: 'Content Testing',
+        createdAt: '2020-20-20'
+      }
+    }
+
+    let loadArticleById = () => true
+
+    const wrapper = shallow(<ArticleDetail match={match} articles={articles} loadArticleById={loadArticleById} />)
+    // console.log(wrapper.debug())
+    expect(wrapper.containsAnyMatchingElements([
+      <List.Item.Meta
+        title={articles.data.title}
+        description={articles.data.content}
+      />,
+      <div>
+        2020-20-20
+      </div>
+    ])).toBe(true)
+  });
+});
+
+describe('test reducer articles', () => {
+  it('reducers init', () => {
+    let wrapper
+    wrapper = articlesReducer(undefined, {})
+    expect(wrapper).toEqual({ 
+      loading: false, 
+      error: false, 
+      datas: [], 
+      data: {} 
+    })
+  });
+});
