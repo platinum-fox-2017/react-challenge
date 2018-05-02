@@ -1,0 +1,28 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+.m-t {
+  margin-top: 20px;
+}
+
+
+.parent {
+  text-align: center;
+}
+.child {
+  display: inline-block;
+}
+
+.xshort {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.short {
+  padding-left: 10%;
+  padding-right: 10%;
+}
