@@ -1,0 +1,27 @@
+#mainNav {
+  position: fixed;
+  border-bottom: 1px solid #e9ecef;
+  background-color: rgba(0,0,0,1);
+  height: 50px;
+  padding-top:0;
+}
+
+#mainNav .navbar-brand {
+  font-weight: 800;
+  color: #fff !important;
+  margin-top:10px;
+  margin-left:10px;
+}
+
+
+.brand-logo {
+  /* animation: App-logo-spin infinite 3s linear; */
+  height: 25px;
+  position: relative;
+  margin-top:-10px;
+}
+
+/* @keyframes brand-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+} */
