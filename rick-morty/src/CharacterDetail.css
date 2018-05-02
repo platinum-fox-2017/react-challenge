@@ -1,0 +1,20 @@
+.container-detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-detail {
+  max-width: 310px;
+  padding: 10px;
+  background: #212121;
+  margin: 10px;
+  border-radius: 5%;
+  
+  color: whitesmoke;
+}
+
+.detail-img {
+  border-radius: 5%;
+}

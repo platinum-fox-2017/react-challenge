@@ -1,0 +1,30 @@
+.navbar {
+  border: 5px solid #212122;
+  height: 50px;
+  align-items: center;
+  vertical-align: center;
+  list-style-type: none;  
+  background: aquamarine;
+}
+
+.navbar > li {
+  flex: 1;
+  background: aquamarine
+}
+
+@media all and (max-width: 600px) {
+  
+  .container {
+    flex-wrap: wrap;
+  }
+  
+  .container > li {
+    flex-basis: 50%;
+  }
+}
+
+@media all and (max-width: 400px) {
+  .container > li {
+    flex-basis: 100%;
+  }
+}
