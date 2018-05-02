@@ -1,0 +1,3 @@
+export const GET_LEAGUE_TABLE = 'GET_LEAGUE_TABLE'
+export const LOADING_DATA = 'LOADING_DATA'
+export const ERROR_DATA = 'ERROR_DATA'

@@ -1,0 +1,3 @@
+export const GET_COMPETITION_LIST = 'GET_COMPETITION_LIST'
+export const LOADING_DATA = 'LOADING_DATA'
+export const ERROR_DATA = 'ERROR_DATA'
