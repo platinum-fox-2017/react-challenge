@@ -9,10 +9,9 @@ class Home extends Component {
   render() { 
     return (  
       <div>
-        <h1>Hellow World !</h1>
-        <p>Welcome to Hacker News </p>
+        <h1>Hacker News </h1>
           <Link to="/news">
-            <button style= {styles.button} class="btn btn-success">read news</button> 
+            <button style= {styles.button} class="btn btn-success">Read News</button> 
           </Link>
           <Link to="/count">
             <button style= {styles.button} class="btn btn-success">Count Number</button>

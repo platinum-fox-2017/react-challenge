@@ -65,8 +65,10 @@ const styles = {
     marginBottom: '15px'
   },
   gif: {
-    textAlign: 'center',
-    width: '100%'
+    width: '100%',
+    //flex: 1, 
+    alignItems: 'center',
+    justifyContent: 'center', 
   }
 }
  

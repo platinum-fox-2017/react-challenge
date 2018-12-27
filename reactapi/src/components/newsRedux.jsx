@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {fetchData,fetchCategory} from '../store/news/news.action' 
 import {Link} from 'react-router-dom';
-import loading from '../tenor.gif'
+import { RingLoader } from 'react-spinners';
 import Articles from './articleredux'
 import NewsButtonSwitch from './newsbutton'
 import { bindActionCreators } from 'redux';
 
 class NewsRedux extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+     
+    }
+  }
+
   componentDidMount = () => {
     let category = this.props.match.params.category
       if(category){
@@ -30,9 +38,9 @@ class NewsRedux extends Component {
         </div>
       {news.length > 0 ? news.map(data =>
          <Articles data={data} key={data.url}/>
-       ):<div>
-         <img src={loading} alt=""/>
-         </div> }
+       ):<div  style={styles.gif} className='sweet-loading'>
+          <RingLoader color={'#123abc'} size={100} loading={this.state.loading}/>
+        </div>}
     </div>
     )
   }
