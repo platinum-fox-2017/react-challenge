@@ -1,0 +1,35 @@
+{
+  "name": "react-challenge",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.4.0",
+    "axios": "^0.18.0",
+    "enzyme": "^3.3.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.2",
+    "react-test-renderer": "^16.3.1",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "test-coverage": "react-scripts test --env=jsdom --coverage",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/registerServiceWorker.js"
+    ]
+  },
+  "devDependencies": {
+    "enzyme-adapter-react-16": "^1.1.1"
+  }
+}
