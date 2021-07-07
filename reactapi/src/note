@@ -1,0 +1,44 @@
+ada 4 siklus dalam react :
+1. component did update => ke trigger biar update 
+2. componentwill mount => sebelum di render 
+3. componentdidmount => setelah di render
+
+> ketika kita mengeset this.setState akan melakukan re-render 
+> prev digunakan untuk mengakses state sebelum berubah 
+
+========================== Router In React ============================
+~ instalation ~
+>npm install react-router-dom
+documentation : react router 
+>penggunaan 
+import{
+  BrowserRouter,
+  Router
+}
+
+<switch>
+buat handle erorrr
+<Route component={NoMatch}/>
+</switch>
+
+memoryrouter => gk akan pindah address bar (temp)
+BrowserRouter => ngeprovide back,route,gohome
+route = > kayak buat configurasi routingnnya
+
+dari path /:username
+>props.match.params.username
+
+children 
+di bagian profile, untuk ke detail profile dan contact profile 
+${props.match.url}
+
+
+~ redirect ~ 
+cara pakai di method 
+
+gohome(){
+  this.props.history.push('/')
+}
+dibungkus dari BrowserRouter
+
+<button onClick={this.gohome}> go </button>
